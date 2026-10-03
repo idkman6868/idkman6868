@@ -10,6 +10,7 @@ Run from the repository root: python3 tools/textures/gen_textures.py
 import colorsys
 import os
 import random
+import zlib
 
 from PIL import Image
 
@@ -193,14 +194,20 @@ SKINS = {
     "kenjaku": dict(hair="#141216", style="long", top="#2a2420", sleeves="#2a2420", sash="#8a6a3a", pants="#1a1614", stitches=True, eyes="#2a1a12"),
     "sukuna": dict(hair="#1a1a24", style="spiky", top="#ece6d8", sleeves="#ece6d8", belt="#2a2a2a", pants="#2a2a2e", eyes="#b01818",
                    face=[(9, 13, "#2a1010"), (14, 13, "#2a1010"), (9, 11, "#b01818"), (14, 11, "#b01818")]),
+    "masamichi_yaga": dict(hair="#141414", skin="#c89a70", top="#2a2a2e", sleeves="#2a2a2e", pants="#1e1e22", glasses=True,
+                           face=[(10, 14, "#141414"), (11, 15, "#141414"), (12, 15, "#141414"), (13, 14, "#141414")]),
+    "yoshinobu_gakuganji": dict(style="bald", skin="#d8b090", top="#4a4a52", sleeves="#4a4a52", sash="#a8a8a0", pants="#3a3a40", eyes="#2a2a2a",
+                                face=[(x, y, "#ececec") for x in range(9, 15) for y in (14, 15)] + [(10, 13, "#ececec"), (13, 13, "#ececec")]),
+    "cursed_corpse": dict(hair="#d86fa0", style="spiky", skin="#e8c8d8", top="#8ab4e0", sleeves="#e8a0c0", pants="#a0d0a0", shoes="#6a6a8a", eyes="#141414",
+                          speckle="#2a2a2a", face=[(11, 14, "#2a2a2a"), (12, 14, "#2a2a2a")]),
     "awakened_player": dict(hair="#3a2a20", top="#1e2a44", collar="#d8d8d8", pants="#1e2232"),
     "incarnated_sorcerer": dict(hair="#18161a", style="long", top="#6a6a70", sash="#2a2a30", pants="#3a3a40"),
 }
 
 
 def make_skins():
-    for i, (name, spec) in enumerate(sorted(SKINS.items())):
-        paint(spec, 1000 + i).save(os.path.join(ROOT, "entity", "npc", name + ".png"))
+    for name, spec in sorted(SKINS.items()):
+        paint(spec, zlib.crc32(name.encode())).save(os.path.join(ROOT, "entity", "npc", name + ".png"))
 
 
 # ---------------------------------------------------------------------------------------------- curses

@@ -7,6 +7,7 @@ import com.curseddomain.cullinggame.npc.NpcProfile;
 import com.curseddomain.cullinggame.npc.SorcererNpcEntity;
 import com.curseddomain.entity.cursedspirit.CursedSpirit;
 import com.curseddomain.entity.cursedspirit.Grade4Curse;
+import com.curseddomain.landmark.Landmarks;
 import com.curseddomain.registry.ModEntities;
 import com.curseddomain.registry.ModParticles;
 import com.curseddomain.shibuya.CurseVariant;
@@ -123,6 +124,7 @@ public final class CullingGame {
             }
          }
 
+         Landmarks.addColonyCities(server, data);
          ModMain.LOGGER.info("[culling game] started, anchor {}", data.anchor);
          return true;
       }

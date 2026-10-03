@@ -39,7 +39,7 @@ public final class AbilityBarHud implements Layer {
             int y = g.guiHeight() - mc.gui.leftHeight - 18 - 2;
             Font font = mc.font;
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
                int index = state.slot(i);
                int x = x0 + i * 20;
                g.fill(x, y, x + 18, y + 18, -1341125608);
@@ -94,7 +94,7 @@ public final class AbilityBarHud implements Layer {
             mc.gui.leftHeight += 24;
             if (technique != null && AbilityManager.techniqueAvailable(player)) {
                technique.domain().ifPresent(domain -> {
-                  int xx = x0 + 80 + 2;
+                  int xx = x0 + 100 + 2;
                   if (xx + 40 < g.guiWidth() / 2) {
                      g.drawString(font, Component.literal("[" + ModKeys.DOMAIN.getTranslatedKeyMessage().getString() + "]"), xx, y + 5, -7704400, true);
                   }

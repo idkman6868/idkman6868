@@ -31,6 +31,8 @@ public final class CullingConfig {
    public static final IntValue SHIBUYA_AUTO_START_DAY;
    public static final IntValue SHIBUYA_CURTAIN_RADIUS;
    public static final IntValue SHIBUYA_ABANDON_DAYS;
+   public static final BooleanValue LANDMARKS;
+   public static final IntValue LANDMARK_CHUNKS_PER_TICK;
 
    private CullingConfig() {
    }
@@ -66,6 +68,12 @@ public final class CullingConfig {
       SHIBUYA_CURTAIN_RADIUS = b.comment("Radius of the curtain over Shibuya.").defineInRange("curtainRadius", 64, 24, 256);
       SHIBUYA_ABANDON_DAYS = b.comment("If no sorcerer enters the curtain within this many days, Kenjaku's plan succeeds without them.")
          .defineInRange("abandonDays", 2, 1, 100);
+      b.pop();
+      b.push("landmarks");
+      LANDMARKS = b.comment("Build Jujutsu High (Tokyo and Kyoto), Shibuya, Tokyo, Kyoto, the cities and Kenjaku's hideout as players come near.")
+         .define("enabled", true);
+      LANDMARK_CHUNKS_PER_TICK = b.comment("Chunks of landmark built per server tick. Raise for faster building, lower if the server lags.")
+         .defineInRange("chunksPerTick", 1, 1, 16);
       b.pop();
       SPEC = b.build();
    }

@@ -17,6 +17,10 @@ public final class CullingLang {
       npcs(lang);
       shibuya(lang);
       commands(lang);
+      school(lang);
+      incarnation(lang);
+      landmarks(lang);
+      menu(lang);
    }
 
    private static void items(LanguageProvider lang) {
@@ -48,6 +52,10 @@ public final class CullingLang {
       lang.add(npc + ".sukuna", "Ryomen Sukuna");
       lang.add(npc + ".awakened_player", "Awakened Player");
       lang.add(npc + ".incarnated_sorcerer", "Incarnated Sorcerer");
+      lang.add(npc + ".masamichi_yaga", "Principal Masamichi Yaga");
+      lang.add(npc + ".yoshinobu_gakuganji", "Principal Yoshinobu Gakuganji");
+      lang.add(npc + ".kenjaku_hideout", "Kenjaku");
+      lang.add(npc + ".cursed_corpse", "Cursed Corpse");
       String curse = "entity.cursed_domain.rampant_curse";
       lang.add(curse, "Cursed Spirit");
       lang.add(curse + ".grade_3", "Grade 3 Curse");
@@ -286,5 +294,139 @@ public final class CullingLang {
       lang.add(c + "locate.shibuya", "Shibuya is at %s, %s.");
       lang.add(c + "locate.colony", "The %s is at %s, %s (radius %s).");
       lang.add(c + "locate.unknown", "Unknown colony, or the game has never started.");
+   }
+
+   private static void school(LanguageProvider lang) {
+      String s = "school.cursed_domain.";
+      lang.add(s + "click", "Click to answer");
+      lang.add(s + "no_question", "Nobody is waiting for your answer.");
+      lang.add(s + "no_technique", "none: your strength is your body");
+      lang.add(s + "technique", "Your cursed technique: %s");
+      lang.add(s + "enrolled", "You are now a student. Your cursed technique, %s, is unlocked.");
+      lang.add(s + "menu_hint", "Press K to open your technique menu and put abilities in your five quick slots.");
+      lang.add(s + "exam.title", "Entrance Exam");
+      lang.add(s + "curse_user.title", "Curse User");
+      lang.add(s + "curse_user.subtitle", "You turned your back on Jujutsu High.");
+      String t = s + "tokyo.";
+      lang.add(t + "cant_see", "You can't even see them yet. Come back when the curses have found you.");
+      lang.add(t + "curse_user", "You've made your choice. Get out of my school.");
+      lang.add(t + "student.1", "Train. Every day. Curses don't wait for you to be ready.");
+      lang.add(t + "student.2", "Grades come from missions, not from talking to me.");
+      lang.add(t + "student.3", "Look after each other. Sorcerers who fight alone die alone.");
+      lang.add(t + "visitor", "A Kyoto student. Behave yourself while you're here.");
+      lang.add(t + "focus", "Less talking. Deal with them first.");
+      lang.add(t + "come_back", "You're not ready. Come back in %s seconds.");
+      lang.add(t + "greet", "So the letter found you. Sit down. I have one question.");
+      lang.add(t + "question", "Why do you want to become a jujutsu sorcerer?");
+      lang.add(t + "answer.1", "To save people.");
+      lang.add(t + "answer.2", "I can see curses now. I don't have a choice.");
+      lang.add(t + "answer.3", "For power.");
+      lang.add(t + "answer.4", "...I don't know yet.");
+      lang.add(t + "response.1", "Everyone says that. Let's see if you mean it.");
+      lang.add(t + "response.2", "Seeing them isn't a reason. Show me you can survive them.");
+      lang.add(t + "response.3", "Power. Then you won't mind a little more of a beating.");
+      lang.add(t + "response.4", "Honest, at least. Answer while you fight.");
+      lang.add(t + "exam.subtitle", "Defeat Principal Yaga's cursed corpses");
+      lang.add(t + "passed", "...Not bad. Stop. One more question.");
+      lang.add(t + "final", "If it came to it, would you die for that reason?");
+      lang.add(t + "final_answer.1", "If I have to.");
+      lang.add(t + "final_answer.2", "No. I want to die surrounded by people, not alone in a fight.");
+      lang.add(t + "final_response.1", "Don't be in such a hurry to die. ...You pass.");
+      lang.add(t + "final_response.2", "Good answer. Never forget it. Welcome to Jujutsu High.");
+      lang.add(t + "welcome", "Welcome to Tokyo Jujutsu High");
+      lang.add(t + "fail.died", "Wake up. You failed. Come back when you've thought it over.");
+      lang.add(t + "fail.fled", "Running away is an answer too. Not the right one.");
+      lang.add(t + "fail.time", "Too slow. Try again later.");
+      lang.add(t + "hit", "Was that supposed to hurt?");
+      lang.add(t + "hit_warning", "Raise a hand against me again and you're done here.");
+      lang.add(t + "curse_user_path", "So that's your answer. Then you're a curse user. Never come back.");
+      String k = s + "kyoto.";
+      lang.add(k + "cant_see", "Hmph. Another one who can't even see curses. Leave.");
+      lang.add(k + "curse_user", "A curse user dares stand in Kyoto? Out.");
+      lang.add(k + "student.1", "Tradition exists for a reason. Respect it.");
+      lang.add(k + "student.2", "The Goodwill Event is coming. Don't embarrass this school.");
+      lang.add(k + "student.3", "Strength without order is just another curse.");
+      lang.add(k + "visitor", "A Tokyo student. Yaga's school gets bolder every year.");
+      lang.add(k + "focus", "Exorcise them first. Then speak.");
+      lang.add(k + "come_back", "Kyoto doesn't take the impatient. Return in %s seconds.");
+      lang.add(k + "greet", "So you wish to join Kyoto Jujutsu High. Then answer me.");
+      lang.add(k + "question", "What does a jujutsu sorcerer owe this world?");
+      lang.add(k + "answer.1", "Protection.");
+      lang.add(k + "answer.2", "Order. Curses must be kept in their place.");
+      lang.add(k + "answer.3", "Nothing. Strength is its own reason.");
+      lang.add(k + "answer.4", "I don't know, sir.");
+      lang.add(k + "response.1", "Words. Show me with your hands.");
+      lang.add(k + "response.2", "A proper answer. Prove you can keep it.");
+      lang.add(k + "response.3", "Arrogant. Then the curses will teach you humility.");
+      lang.add(k + "response.4", "At least you are not a liar. Begin.");
+      lang.add(k + "exam.subtitle", "Exorcise the curses Kyoto keeps for its exams");
+      lang.add(k + "passed", "Adequate. A final question.");
+      lang.add(k + "final", "Will you obey the rules of jujutsu society, even when they are hard?");
+      lang.add(k + "final_answer.1", "Yes.");
+      lang.add(k + "final_answer.2", "Only when they're right.");
+      lang.add(k + "final_response.1", "Good. You are accepted.");
+      lang.add(k + "final_response.2", "Insolent... but honest. You are accepted. I will be watching you.");
+      lang.add(k + "welcome", "Welcome to Kyoto Jujutsu High");
+      lang.add(k + "fail.died", "Unworthy. Return when you are stronger.");
+      lang.add(k + "fail.fled", "You fled from an exam. Disgraceful.");
+      lang.add(k + "fail.time", "Too slow. Come back another day.");
+      lang.add(k + "hit", "You raise your hand to an elder? Pathetic.");
+   }
+
+   private static void incarnation(LanguageProvider lang) {
+      String i = "incarnation.cursed_domain.";
+      lang.add(i + "idle.1", "Oh? A visitor. I'm only borrowing this body, so don't mind the stitches.");
+      lang.add(i + "idle.2", "Chaos is the soil the future grows in. Remember that.");
+      lang.add(i + "idle.3", "You don't interest me. Not yet.");
+      lang.add(i + "offer.1", "Well, well. The King of Curses' own technique, in someone like you. How delightful.");
+      lang.add(i + "offer.2", "I could make you into twenty fingers and scatter you. You'd wake in a new body, whole. Shall we?");
+      lang.add(i + "button.accept", "[Make me into twenty fingers]");
+      lang.add(i + "button.accept.hover", "Become Sukuna's twenty fingers and wake up in a random villager's body");
+      lang.add(i + "button.refuse", "[Refuse]");
+      lang.add(i + "button.refuse.hover", "Walk away");
+      lang.add(i + "refused", "A pity. The offer won't last forever.");
+      lang.add(i + "no_offer", "Kenjaku isn't offering you anything right now.");
+      lang.add(i + "wait", "Patience. You'll wake soon enough.");
+      lang.add(i + "already", "You've already been reborn. Enjoy the new body.");
+      lang.add(i + "begin", "Hold still. This only hurts for a thousand years.");
+      lang.add(i + "fingers.title", "Twenty Fingers");
+      lang.add(i + "fingers.subtitle", "Your soul is split and sealed away...");
+      lang.add(i + "woke.title", "Incarnation");
+      lang.add(i + "woke.subtitle", "You open your eyes in a villager's body.");
+      lang.add(i + "woke", "Someone else's hands. Someone else's heartbeat. And every one of your twenty fingers, back where they belong.");
+   }
+
+   private static void landmarks(LanguageProvider lang) {
+      String l = "landmark.cursed_domain.";
+      lang.add(l + "type.tokyo_high", "Tokyo Jujutsu High");
+      lang.add(l + "type.kyoto_high", "Kyoto Jujutsu High");
+      lang.add(l + "type.shibuya", "Shibuya");
+      lang.add(l + "type.tokyo", "Tokyo (Minato, Tokyo Tower)");
+      lang.add(l + "type.kyoto", "Kyoto");
+      lang.add(l + "type.city", "City");
+      lang.add(l + "type.ruined_city", "Ruined City");
+      lang.add(l + "type.kenjaku_hideout", "Abandoned Temple");
+      lang.add(l + "name.sendai", "Sendai");
+      lang.add(l + "name.osaka", "Osaka");
+      lang.add(l + "name.yokohama", "Yokohama");
+      lang.add(l + "atlas.header", "Landmarks:");
+      lang.add(l + "atlas.entry", " %1$s: %2$s, %3$s (%4$s blocks away, %5$s%% built)");
+      lang.add(l + "unknown", "Unknown landmark.");
+      lang.add(l + "created", "Placed %s (%s). It will be built as players come near.");
+      lang.add(l + "removed", "Forgot landmark %s. Blocks already built stay.");
+      lang.add(l + "rebuilding", "%s will be built again as players come near.");
+   }
+
+   private static void menu(LanguageProvider lang) {
+      String m = "gui.cursed_domain.technique_menu";
+      lang.add("key.cursed_domain.technique_menu", "Technique menu");
+      lang.add(m, "Technique");
+      lang.add(m + ".sealed", "Cursed technique sealed");
+      lang.add(m + ".status", "%s, %s");
+      lang.add(m + ".enroll", "Enroll at Tokyo or Kyoto Jujutsu High to unlock your technique.");
+      lang.add(m + ".empty", "No abilities yet.");
+      lang.add(m + ".help", "Click an ability, then click a slot (or press 1-5) to equip it. Press K to close.");
+      lang.add(m + ".slots", "Quick slots");
+      lang.add(m + ".needs_grade", "Requires %s");
    }
 }

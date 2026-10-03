@@ -7,7 +7,7 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 
 public final class ModKeys {
    public static final String CATEGORY = "key.categories.cursed_domain";
-   public static final KeyMapping[] SLOTS = new KeyMapping[]{key("ability_1", 90), key("ability_2", 86), key("ability_3", 66), key("ability_4", 78)};
+   public static final KeyMapping[] SLOTS = new KeyMapping[]{key("ability_1", 90), key("ability_2", 86), key("ability_3", 66), key("ability_4", 78), key("ability_5", 77)};
    public static final KeyMapping WHEEL = key("ability_wheel", 82);
    public static final KeyMapping DOMAIN = key("domain", 71);
 

@@ -26,7 +26,11 @@ public enum NpcProfile {
    KENJAKU(Colonies.LAKE_GOSHO, 0, 320.0, 9.0, 0.3, 10.0, true, true, NpcAbility.CURSED_SPIRIT_MANIPULATION, NpcProfile.Defeat.BOSS, true, NpcProfile.Held.NONE),
    SUKUNA(Colonies.LAKE_GOSHO, 0, 420.0, 12.0, 0.34, 12.0, true, true, NpcAbility.SHRINE, NpcProfile.Defeat.BOSS, true, NpcProfile.Held.NONE),
    AWAKENED_PLAYER(null, 0, 30.0, 4.0, 0.3, 0.0, true, true, NpcAbility.RANDOM, NpcProfile.Defeat.YIELDS, false, NpcProfile.Held.NONE),
-   INCARNATED_SORCERER(null, 0, 46.0, 6.0, 0.31, 2.0, true, true, NpcAbility.RANDOM, NpcProfile.Defeat.YIELDS, false, NpcProfile.Held.IRON_SWORD);
+   INCARNATED_SORCERER(null, 0, 46.0, 6.0, 0.31, 2.0, true, true, NpcAbility.RANDOM, NpcProfile.Defeat.YIELDS, false, NpcProfile.Held.IRON_SWORD),
+   MASAMICHI_YAGA(null, 0, 120.0, 6.0, 0.28, 6.0, false, true, NpcAbility.NONE, NpcProfile.Defeat.INVULNERABLE, false, NpcProfile.Held.NONE),
+   YOSHINOBU_GAKUGANJI(null, 0, 120.0, 6.0, 0.25, 6.0, false, true, NpcAbility.NONE, NpcProfile.Defeat.INVULNERABLE, false, NpcProfile.Held.NONE),
+   KENJAKU_HIDEOUT(null, 0, 320.0, 9.0, 0.3, 10.0, false, true, NpcAbility.NONE, NpcProfile.Defeat.INVULNERABLE, false, NpcProfile.Held.NONE),
+   CURSED_CORPSE(null, 0, 26.0, 4.0, 0.3, 2.0, true, false, NpcAbility.NONE, NpcProfile.Defeat.DIES, false, NpcProfile.Held.NONE);
 
    @Nullable
    private final String colony;
@@ -129,6 +133,15 @@ public enum NpcProfile {
       return this.colony != null;
    }
 
+   /** Lives at a landmark (the principals, Kenjaku in his hideout). */
+   public boolean resident() {
+      return this == MASAMICHI_YAGA || this == YOSHINOBU_GAKUGANJI || this == KENJAKU_HIDEOUT;
+   }
+
+   public boolean nameVisible() {
+      return this.unique() || this.scripted() || this.resident();
+   }
+
    /** Spawned by the endgame script rather than by players walking into the colony. */
    public boolean scripted() {
       return this == KENJAKU || this == SUKUNA;
@@ -139,7 +152,7 @@ public enum NpcProfile {
    }
 
    public String texture() {
-      return "textures/entity/npc/" + this.id() + ".png";
+      return "textures/entity/npc/" + (this == KENJAKU_HIDEOUT ? KENJAKU.id() : this.id()) + ".png";
    }
 
    public static NpcProfile byIndex(int index) {

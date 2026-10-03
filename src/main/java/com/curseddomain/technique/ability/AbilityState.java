@@ -17,7 +17,7 @@ public final class AbilityState implements INBTSerializable<CompoundTag> {
    @Nullable
    ResourceLocation charging;
    long chargeStart;
-   int[] slots = new int[]{0, 1, 2, 3};
+   int[] slots = new int[]{0, 1, 2, 3, 4};
    boolean dirty = true;
    @Nullable
    private AbilitySyncPayload clientView;
@@ -62,7 +62,7 @@ public final class AbilityState implements INBTSerializable<CompoundTag> {
 
    public void deserializeNBT(Provider provider, CompoundTag tag) {
       int[] saved = tag.getIntArray("slots");
-      this.slots = saved.length == 4 ? saved : new int[]{0, 1, 2, 3};
+      this.slots = saved.length == 5 ? saved : new int[]{0, 1, 2, 3, 4};
       this.cooldownUntil.clear();
       this.cooldownTotal.clear();
       CompoundTag cooldowns = tag.getCompound("cooldowns");

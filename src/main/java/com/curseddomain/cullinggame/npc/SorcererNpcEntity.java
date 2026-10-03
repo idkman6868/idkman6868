@@ -8,7 +8,10 @@ import com.curseddomain.cullinggame.CullingRegistries;
 import com.curseddomain.cullinggame.CullingRule;
 import com.curseddomain.cullinggame.EntityBossBar;
 import com.curseddomain.cullinggame.Kogane;
+import com.curseddomain.config.ServerConfig;
 import com.curseddomain.domain.DomainExpansion;
+import com.curseddomain.incarnation.Incarnation;
+import com.curseddomain.school.JujutsuHigh;
 import com.curseddomain.domain.DomainManager;
 import com.curseddomain.domain.DomainStyle;
 import com.curseddomain.domain.DomainType;
@@ -31,6 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -93,6 +97,11 @@ public class SorcererNpcEntity extends PathfinderMob {
    private UUID lastAttacker;
    @Nullable
    private EntityBossBar bar;
+   /** Residents stay near the spot they were placed at. */
+   @Nullable
+   private Vec3 home;
+   /** Cursed corpses only exist for one entrance exam; ones loaded from disk are left over and vanish. */
+   private boolean stale;
 
    public SorcererNpcEntity(EntityType<? extends SorcererNpcEntity> type, Level level) {
       super(type, level);
@@ -182,7 +191,12 @@ public class SorcererNpcEntity extends PathfinderMob {
       this.getAttribute(Attributes.ARMOR).setBaseValue(profile.armor());
       Component name = profile.unique() || profile.scripted() ? profile.displayName() : Component.translatable("entity.cursed_domain.sorcerer_npc." + profile.id());
       this.setCustomName(name.copy().withStyle(profile.hostile() ? ChatFormatting.RED : ChatFormatting.AQUA));
-      this.setCustomNameVisible(profile.unique());
+      this.setCustomNameVisible(profile.nameVisible());
+   }
+
+   public void setHome(Vec3 home) {
+      this.home = home;
+      this.restrictTo(BlockPos.containing(home), 6);
    }
 
    public Component npcName() {
@@ -202,6 +216,16 @@ public class SorcererNpcEntity extends PathfinderMob {
 
    private void serverTick(ServerLevel level) {
       NpcProfile profile = this.profile();
+      if (this.stale) {
+         this.discard();
+         return;
+      }
+
+      if (this.home != null && this.tickCount % 40 == 0 && this.position().distanceToSqr(this.home) > 144.0) {
+         this.teleportTo(this.home.x, this.home.y, this.home.z);
+         this.getNavigation().stop();
+      }
+
       if (profile.boss()) {
          if (this.bar == null) {
             this.bar = new EntityBossBar(
@@ -495,7 +519,13 @@ public class SorcererNpcEntity extends PathfinderMob {
          NpcProfile profile = this.profile();
          Entity attacker = source.getEntity();
          ServerPlayer player = playerBehind(attacker);
-         if (profile.defeat() == NpcProfile.Defeat.INVULNERABLE && attacker != null) {
+         if (profile == NpcProfile.MASAMICHI_YAGA || profile == NpcProfile.YOSHINOBU_GAKUGANJI) {
+            if (player != null) {
+               JujutsuHigh.principalHit(player, this);
+            }
+
+            return profile == NpcProfile.MASAMICHI_YAGA && !(Boolean)ServerConfig.YAGA_INVULNERABLE.get() && super.hurt(source, amount);
+         } else if (profile.defeat() == NpcProfile.Defeat.INVULNERABLE && attacker != null) {
             if (player != null && this.random.nextInt(3) == 0) {
                this.say(level, profile.id() + ".immune." + (1 + this.random.nextInt(3)), 16.0);
             }
@@ -620,6 +650,12 @@ public class SorcererNpcEntity extends PathfinderMob {
          } else if (profile == NpcProfile.ROKUJUSHI_MIYO) {
             this.sumoLesson(level, sp);
             return InteractionResult.SUCCESS;
+         } else if (profile == NpcProfile.MASAMICHI_YAGA || profile == NpcProfile.YOSHINOBU_GAKUGANJI) {
+            JujutsuHigh.interact(sp, this);
+            return InteractionResult.SUCCESS;
+         } else if (profile == NpcProfile.KENJAKU_HIDEOUT || profile == NpcProfile.KENJAKU) {
+            Incarnation.kenjakuInteract(sp, this);
+            return InteractionResult.SUCCESS;
          }
       }
 
@@ -666,6 +702,11 @@ public class SorcererNpcEntity extends PathfinderMob {
       tag.putInt("points", this.points);
       tag.putBoolean("shibuya", this.shibuyaMode);
       tag.putBoolean("phase_two", this.phaseTwo);
+      if (this.home != null) {
+         tag.putDouble("home_x", this.home.x);
+         tag.putDouble("home_y", this.home.y);
+         tag.putDouble("home_z", this.home.z);
+      }
    }
 
    public void readAdditionalSaveData(CompoundTag tag) {
@@ -675,6 +716,11 @@ public class SorcererNpcEntity extends PathfinderMob {
       this.points = tag.getInt("points");
       this.shibuyaMode = tag.getBoolean("shibuya");
       this.phaseTwo = tag.getBoolean("phase_two");
+      if (tag.contains("home_x")) {
+         this.setHome(new Vec3(tag.getDouble("home_x"), tag.getDouble("home_y"), tag.getDouble("home_z")));
+      }
+
+      this.stale = profile == NpcProfile.CURSED_CORPSE;
       float health = this.getHealth();
       this.applyProfile();
       this.setHealth(health);

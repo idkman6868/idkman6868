@@ -58,7 +58,7 @@ public class AbilityWheelScreen extends Screen {
    }
 
    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-      if (keyCode >= 49 && keyCode <= 52 && this.hovered >= 0) {
+      if (keyCode >= 49 && keyCode <= 53 && this.hovered >= 0) {
          PacketDistributor.sendToServer(new AbilityInputPayloads.AssignSlot(keyCode - 49, this.hovered), new CustomPacketPayload[0]);
          return true;
       } else {
@@ -109,7 +109,7 @@ public class AbilityWheelScreen extends Screen {
             g.fill(x - 1, y - 1, x + 25, y + 25, -1879048192);
          }
 
-         for (int s = 0; s < 4; s++) {
+         for (int s = 0; s < 5; s++) {
             if (state.slot(s) == i) {
                g.drawString(this.font, String.valueOf(s + 1), x + 20, y - 6, -1523648, true);
             }

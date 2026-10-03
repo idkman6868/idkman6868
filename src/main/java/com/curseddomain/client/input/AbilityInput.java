@@ -18,8 +18,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
    value = {Dist.CLIENT}
 )
 public final class AbilityInput {
-   private static final boolean[] HELD = new boolean[4];
-   private static final int[] HELD_INDEX = new int[]{-1, -1, -1, -1};
+   private static final boolean[] HELD = new boolean[5];
+   private static final int[] HELD_INDEX = new int[]{-1, -1, -1, -1, -1};
 
    private AbilityInput() {
    }
@@ -31,7 +31,7 @@ public final class AbilityInput {
          boolean inGame = mc.screen == null;
          AbilityState state = (AbilityState)mc.player.getData(ModAttachments.ABILITY_STATE);
 
-         for (int i = 0; i < 4; i++) {
+         for (int i = 0; i < 5; i++) {
             boolean down = inGame && ModKeys.SLOTS[i].isDown();
             if (down && !HELD[i]) {
                HELD_INDEX[i] = state.slot(i);

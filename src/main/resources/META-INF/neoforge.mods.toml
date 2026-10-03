@@ -4,7 +4,7 @@ license = "All Rights Reserved"
 
 [[mods]]
 modId = "cursed_domain"
-version = "0.2.0"
+version = "0.3.0"
 displayName = "Jujutsu Kaisen: Cursed Domain"
 authors = "Cursed Domain Team"
 description = '''Start as an ordinary person who cannot see curses. Awaken, find Tokyo Jujutsu High, pass Principal Yaga's interview and rise from Grade 4 to Special Grade.
@@ -12,6 +12,7 @@ description = '''Start as an ordinary person who cannot see curses. Awaken, find
 Cursed energy, innate techniques, domain expansions, binding vows and Black Flash.
 
 New in 0.2.0: the Shibuya Incident and Kenjaku's Culling Game: ten barrier colonies, Kogane, rules 1 to 15, points, and the players of the colonies.
+New in 0.3.0: Tokyo and Kyoto Jujutsu High with entrance interviews, Shibuya, Tokyo, Kyoto and other cities built into the world, a technique menu with five ability slots, and Kenjaku's offer to Shrine users.
 Fan-made, non-commercial. Jujutsu Kaisen is (c) Gege Akutami / Shueisha / MAPPA. All assets in this mod are original or procedurally generated.'''
 
 [[dependencies.cursed_domain]]

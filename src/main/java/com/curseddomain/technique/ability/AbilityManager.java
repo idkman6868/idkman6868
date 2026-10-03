@@ -95,7 +95,7 @@ public final class AbilityManager {
    }
 
    public static void assignSlot(ServerPlayer player, int slot, int index) {
-      if (slot >= 0 && slot <= 3 && index >= 0 && index < abilities(player).size()) {
+      if (slot >= 0 && slot <= 4 && index >= 0 && index < abilities(player).size()) {
          AbilityState state = state(player);
          state.slots[slot] = index;
          state.dirty = true;
@@ -355,7 +355,7 @@ public final class AbilityManager {
       }
 
       int elapsed = chargingIndex < 0 ? 0 : (int)(now - state.chargeStart);
-      List<Integer> slots = List.of(state.slots[0], state.slots[1], state.slots[2], state.slots[3]);
+      List<Integer> slots = List.of(state.slots[0], state.slots[1], state.slots[2], state.slots[3], state.slots[4]);
       PacketDistributor.sendToPlayer(player, new AbilitySyncPayload(entries, slots, chargingIndex, elapsed, chargeMax), new CustomPacketPayload[0]);
    }
 

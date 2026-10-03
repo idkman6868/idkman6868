@@ -258,11 +258,12 @@ public final class TechniqueLang {
       lang.add("key.cursed_domain.ability_2", "Ability slot 2");
       lang.add("key.cursed_domain.ability_3", "Ability slot 3");
       lang.add("key.cursed_domain.ability_4", "Ability slot 4");
+      lang.add("key.cursed_domain.ability_5", "Ability slot 5");
       lang.add("key.cursed_domain.ability_wheel", "Ability wheel (hold)");
       lang.add("key.cursed_domain.domain", "Domain expansion");
       lang.add("gui.cursed_domain.ability_wheel", "Abilities");
       lang.add("gui.cursed_domain.ability_wheel.hint", "Point at an ability, let go of the key to use it");
-      lang.add("gui.cursed_domain.ability_wheel.assign", "While pointing: 1-4 puts it in a quick slot");
+      lang.add("gui.cursed_domain.ability_wheel.assign", "While pointing: 1-5 puts it in a quick slot");
       lang.add("gui.cursed_domain.ability_cost", "Cost %s, cooldown %ss");
       lang.add("gui.cursed_domain.maximum", "Maximum");
       String c = "commands.cursed_domain.";
