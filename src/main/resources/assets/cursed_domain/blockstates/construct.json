@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cursed_domain:block/construct"
+    }
+  }
+}

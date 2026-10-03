@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [ { "condition": "minecraft:random_chance", "chance": 0.3 } ],
+      "entries": [ { "type": "minecraft:item", "name": "cursed_domain:cursed_object" } ]
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+# ---- hierarchy (Mojmap 1.21.1) ----
+class net/minecraft/world/entity/LivingEntity super net/minecraft/world/entity/Entity
+class net/minecraft/world/entity/Mob super net/minecraft/world/entity/LivingEntity
+class net/minecraft/world/entity/PathfinderMob super net/minecraft/world/entity/Mob
+class net/minecraft/world/entity/monster/Monster super net/minecraft/world/entity/PathfinderMob
+class net/minecraft/world/entity/monster/Zombie super net/minecraft/world/entity/monster/Monster
+class net/minecraft/world/entity/npc/AbstractVillager super net/minecraft/world/entity/PathfinderMob
+class net/minecraft/world/entity/player/Player super net/minecraft/world/entity/LivingEntity
+class net/minecraft/server/level/ServerPlayer super net/minecraft/world/entity/player/Player
+class net/minecraft/client/player/LocalPlayer super net/minecraft/world/entity/player/Player
+class net/neoforged/neoforge/common/util/FakePlayer super net/minecraft/server/level/ServerPlayer
+class net/minecraft/world/entity/projectile/Projectile super net/minecraft/world/entity/Entity
+class net/minecraft/world/entity/item/ItemEntity super net/minecraft/world/entity/Entity
+class net/minecraft/world/level/BlockGetter interface
+class net/minecraft/world/level/EntityGetter interface
+class net/minecraft/world/level/ServerLevelAccessor interface
+class net/minecraft/world/level/Level implements net/minecraft/world/level/BlockGetter implements net/minecraft/world/level/EntityGetter
+class net/minecraft/server/level/ServerLevel super net/minecraft/world/level/Level implements net/minecraft/world/level/ServerLevelAccessor
+class net/minecraft/client/multiplayer/ClientLevel super net/minecraft/world/level/Level
+class net/minecraft/network/chat/FormattedText interface
+class net/minecraft/network/chat/Component implements net/minecraft/network/chat/FormattedText
+class net/minecraft/network/chat/MutableComponent implements net/minecraft/network/chat/Component
+class net/minecraft/util/FormattedCharSequence interface
+class net/minecraft/core/BlockPos super net/minecraft/core/Vec3i
+class net/minecraft/core/Position interface
+class net/minecraft/world/phys/Vec3 implements net/minecraft/core/Position
+class net/minecraft/nbt/Tag interface
+class net/minecraft/nbt/CompoundTag implements net/minecraft/nbt/Tag
+class net/minecraft/nbt/ListTag implements net/minecraft/nbt/Tag
+class net/minecraft/nbt/StringTag implements net/minecraft/nbt/Tag
+class net/minecraft/core/particles/ParticleOptions interface
+class net/minecraft/core/particles/SimpleParticleType super net/minecraft/core/particles/ParticleType implements net/minecraft/core/particles/ParticleOptions
+class net/minecraft/core/particles/BlockParticleOption implements net/minecraft/core/particles/ParticleOptions
+class net/minecraft/core/Holder$Reference implements net/minecraft/core/Holder
+class net/minecraft/world/level/ItemLike interface
+class net/neoforged/neoforge/registries/DeferredHolder implements net/minecraft/core/Holder implements java/util/function/Supplier
+class net/neoforged/neoforge/registries/DeferredItem super net/neoforged/neoforge/registries/DeferredHolder implements net/minecraft/world/level/ItemLike
+class net/neoforged/neoforge/registries/DeferredBlock super net/neoforged/neoforge/registries/DeferredHolder implements net/minecraft/world/level/ItemLike
+class net/neoforged/neoforge/registries/DeferredRegister$Items super net/neoforged/neoforge/registries/DeferredRegister
+class net/neoforged/neoforge/registries/DeferredRegister$Blocks super net/neoforged/neoforge/registries/DeferredRegister
+class net/minecraft/world/item/Item implements net/minecraft/world/level/ItemLike
+class net/minecraft/world/item/SwordItem super net/minecraft/world/item/Item
+class net/minecraft/world/item/SpawnEggItem super net/minecraft/world/item/Item
+class net/neoforged/neoforge/common/DeferredSpawnEggItem super net/minecraft/world/item/SpawnEggItem
+class net/minecraft/world/level/block/state/BlockBehaviour
+class net/minecraft/world/level/block/Block super net/minecraft/world/level/block/state/BlockBehaviour implements net/minecraft/world/level/ItemLike
+class net/minecraft/world/level/block/RotatedPillarBlock super net/minecraft/world/level/block/Block
+class net/minecraft/world/level/block/BaseFireBlock super net/minecraft/world/level/block/Block
+class net/minecraft/world/level/block/SkullBlock super net/minecraft/world/level/block/Block
+class net/minecraft/world/item/Tier interface
+class net/minecraft/world/item/Tiers implements net/minecraft/world/item/Tier
+class net/minecraft/world/item/TooltipFlag interface
+class net/minecraft/world/Container interface
+class net/minecraft/world/SimpleContainer implements net/minecraft/world/Container
+class net/minecraft/world/MenuProvider interface
+class net/minecraft/world/SimpleMenuProvider implements net/minecraft/world/MenuProvider
+class net/minecraft/world/inventory/ChestMenu super net/minecraft/world/inventory/AbstractContainerMenu
+class net/minecraft/world/entity/SpawnGroupData interface
+class net/minecraft/world/entity/SpawnPlacementType interface
+class net/minecraft/world/entity/ai/goal/target/TargetGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal super net/minecraft/world/entity/ai/goal/target/TargetGoal
+class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal super net/minecraft/world/entity/ai/goal/target/TargetGoal
+class net/minecraft/world/entity/ai/goal/MeleeAttackGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/world/entity/ai/goal/FloatGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/world/entity/ai/goal/LookAtPlayerGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/world/entity/ai/goal/RandomLookAroundGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal super net/minecraft/world/entity/ai/goal/Goal
+class net/minecraft/commands/SharedSuggestionProvider interface
+class net/minecraft/commands/CommandSourceStack implements net/minecraft/commands/SharedSuggestionProvider
+class com/mojang/brigadier/builder/LiteralArgumentBuilder super com/mojang/brigadier/builder/ArgumentBuilder
+class com/mojang/brigadier/builder/RequiredArgumentBuilder super com/mojang/brigadier/builder/ArgumentBuilder
+class com/mojang/brigadier/Message interface
+class com/mojang/brigadier/exceptions/CommandSyntaxException super java/lang/Exception
+class net/minecraft/network/RegistryFriendlyByteBuf super io/netty/buffer/ByteBuf
+class net/minecraft/client/renderer/entity/MobRenderer super net/minecraft/client/renderer/entity/EntityRenderer implements net/minecraft/client/renderer/entity/RenderLayerParent
+class net/minecraft/client/renderer/entity/RenderLayerParent interface
+class net/minecraft/client/renderer/entity/layers/EyesLayer super net/minecraft/client/renderer/entity/layers/RenderLayer
+class net/minecraft/client/model/HierarchicalModel super net/minecraft/client/model/EntityModel
+class net/minecraft/client/particle/TextureSheetParticle super net/minecraft/client/particle/Particle
+class net/minecraft/client/gui/components/Button super net/minecraft/client/gui/components/events/GuiEventListener
+class net/minecraft/client/gui/components/events/GuiEventListener interface
+class net/minecraft/client/gui/screens/TitleScreen super net/minecraft/client/gui/screens/Screen
+class net/minecraft/client/gui/screens/AccessibilityOnboardingScreen super net/minecraft/client/gui/screens/Screen
+class net/neoforged/neoforge/client/gui/ConfigurationScreen super net/minecraft/client/gui/screens/Screen
+class net/minecraft/client/renderer/RenderType super net/minecraft/client/renderer/RenderStateShard
+class net/minecraft/client/renderer/RenderType$CompositeRenderType super net/minecraft/client/renderer/RenderType
+class net/minecraft/client/renderer/MultiBufferSource$BufferSource implements net/minecraft/client/renderer/MultiBufferSource
+class net/minecraft/server/packs/resources/PreparableReloadListener interface
+class net/minecraft/server/packs/resources/ResourceManager interface
+class net/minecraft/server/packs/resources/SimpleJsonResourceReloadListener implements net/minecraft/server/packs/resources/PreparableReloadListener
+class net/minecraft/data/DataProvider interface
+class net/minecraft/util/profiling/ProfilerFiller interface
+class net/neoforged/fml/IExtensionPoint interface
+class net/neoforged/neoforge/client/gui/IConfigScreenFactory implements net/neoforged/fml/IExtensionPoint
+class net/neoforged/fml/config/IConfigSpec interface
+class net/neoforged/neoforge/common/ModConfigSpec implements net/neoforged/fml/config/IConfigSpec
+class net/neoforged/neoforge/client/settings/IKeyConflictContext interface
+class net/neoforged/neoforge/client/settings/KeyConflictContext implements net/neoforged/neoforge/client/settings/IKeyConflictContext
+class net/minecraft/network/syncher/EntityDataSerializer interface
+class net/neoforged/neoforge/common/ModConfigSpec$BooleanValue super net/neoforged/neoforge/common/ModConfigSpec$ConfigValue
+class net/neoforged/neoforge/common/ModConfigSpec$IntValue super net/neoforged/neoforge/common/ModConfigSpec$ConfigValue
+class net/neoforged/neoforge/common/ModConfigSpec$DoubleValue super net/neoforged/neoforge/common/ModConfigSpec$ConfigValue
+class net/neoforged/neoforge/common/ModConfigSpec$EnumValue super net/neoforged/neoforge/common/ModConfigSpec$ConfigValue
+class net/neoforged/neoforge/common/ModConfigSpec$ConfigValue implements java/util/function/Supplier arity=1
+class net/neoforged/neoforge/event/tick/ServerTickEvent$Post super net/neoforged/neoforge/event/tick/ServerTickEvent
+class net/neoforged/neoforge/event/tick/PlayerTickEvent$Post super net/neoforged/neoforge/event/tick/PlayerTickEvent
+# ---- APIs used by the Culling Game code that the 0.1.0 jar never referenced (Mojmap 1.21.1 / NeoForge 21.1) ----
+msig net/neoforged/bus/api/IEventBus addListener (Ljava/util/function/Consumer;)V <T:Ljava/lang/Object;>(Ljava/util/function/Consumer<TT;>;)V
+method net/neoforged/neoforge/event/tick/ServerTickEvent getServer ()Lnet/minecraft/server/MinecraftServer;
+method net/neoforged/neoforge/event/entity/living/LivingDeathEvent getSource ()Lnet/minecraft/world/damagesource/DamageSource;
+method net/neoforged/fml/ModContainer registerConfig (Lnet/neoforged/fml/config/ModConfig$Type;Lnet/neoforged/fml/config/IConfigSpec;Ljava/lang/String;)V
+class net/minecraft/world/BossEvent
+class net/minecraft/server/level/ServerBossEvent super net/minecraft/world/BossEvent
+class net/minecraft/world/BossEvent$BossBarColor enum
+class net/minecraft/world/BossEvent$BossBarOverlay enum
+method net/minecraft/server/level/ServerBossEvent <init> (Lnet/minecraft/network/chat/Component;Lnet/minecraft/world/BossEvent$BossBarColor;Lnet/minecraft/world/BossEvent$BossBarOverlay;)V
+method net/minecraft/server/level/ServerBossEvent addPlayer (Lnet/minecraft/server/level/ServerPlayer;)V
+method net/minecraft/server/level/ServerBossEvent removePlayer (Lnet/minecraft/server/level/ServerPlayer;)V
+method net/minecraft/server/level/ServerBossEvent removeAllPlayers ()V
+method net/minecraft/server/level/ServerBossEvent setName (Lnet/minecraft/network/chat/Component;)V
+method net/minecraft/server/level/ServerBossEvent setProgress (F)V
+method net/minecraft/server/level/ServerBossEvent setColor (Lnet/minecraft/world/BossEvent$BossBarColor;)V
+sfield net/minecraft/world/BossEvent$BossBarColor YELLOW Lnet/minecraft/world/BossEvent$BossBarColor;
+sfield net/minecraft/world/BossEvent$BossBarColor RED Lnet/minecraft/world/BossEvent$BossBarColor;
+sfield net/minecraft/world/BossEvent$BossBarColor PURPLE Lnet/minecraft/world/BossEvent$BossBarColor;
+sfield net/minecraft/world/BossEvent$BossBarOverlay PROGRESS Lnet/minecraft/world/BossEvent$BossBarOverlay;
+sfield net/minecraft/world/BossEvent$BossBarOverlay NOTCHED_10 Lnet/minecraft/world/BossEvent$BossBarOverlay;
+field net/minecraft/server/level/ServerPlayer connection Lnet/minecraft/server/network/ServerGamePacketListenerImpl;
+method net/minecraft/server/network/ServerGamePacketListenerImpl send (Lnet/minecraft/network/protocol/Packet;)V
+class net/minecraft/network/protocol/Packet interface
+class net/minecraft/network/protocol/game/ClientboundSetTitleTextPacket implements net/minecraft/network/protocol/Packet
+class net/minecraft/network/protocol/game/ClientboundSetSubtitleTextPacket implements net/minecraft/network/protocol/Packet
+class net/minecraft/network/protocol/game/ClientboundSetTitlesAnimationPacket implements net/minecraft/network/protocol/Packet
+method net/minecraft/network/protocol/game/ClientboundSetTitleTextPacket <init> (Lnet/minecraft/network/chat/Component;)V
+method net/minecraft/network/protocol/game/ClientboundSetSubtitleTextPacket <init> (Lnet/minecraft/network/chat/Component;)V
+method net/minecraft/network/protocol/game/ClientboundSetTitlesAnimationPacket <init> (III)V
+class com/mojang/brigadier/arguments/ArgumentType interface
+class com/mojang/brigadier/arguments/IntegerArgumentType implements com/mojang/brigadier/arguments/ArgumentType
+static com/mojang/brigadier/arguments/IntegerArgumentType integer (II)Lcom/mojang/brigadier/arguments/IntegerArgumentType;
+static com/mojang/brigadier/arguments/IntegerArgumentType getInteger (Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)I
+class com/mojang/brigadier/arguments/StringArgumentType implements com/mojang/brigadier/arguments/ArgumentType
+class com/mojang/brigadier/arguments/FloatArgumentType implements com/mojang/brigadier/arguments/ArgumentType
+class net/minecraft/commands/arguments/EntityArgument implements com/mojang/brigadier/arguments/ArgumentType
+class net/minecraft/commands/arguments/ResourceLocationArgument implements com/mojang/brigadier/arguments/ArgumentType
+class net/minecraft/commands/arguments/coordinates/BlockPosArgument implements com/mojang/brigadier/arguments/ArgumentType
+throws com/mojang/brigadier/Command run (Lcom/mojang/brigadier/context/CommandContext;)I com/mojang/brigadier/exceptions/CommandSyntaxException
+msig net/minecraft/network/chat/MutableComponent withStyle (Ljava/util/function/UnaryOperator;)Lnet/minecraft/network/chat/MutableComponent; (Ljava/util/function/UnaryOperator<Lnet/minecraft/network/chat/Style;>;)Lnet/minecraft/network/chat/MutableComponent;
+method net/minecraft/commands/CommandSourceStack getServer ()Lnet/minecraft/server/MinecraftServer;
+method net/minecraft/commands/CommandSourceStack getTextName ()Ljava/lang/String;
+method net/minecraft/world/entity/Entity setCustomName (Lnet/minecraft/network/chat/Component;)V
+method net/minecraft/world/entity/Entity setCustomNameVisible (Z)V
+method net/minecraft/world/entity/Entity getEyePosition ()Lnet/minecraft/world/phys/Vec3;
+method net/minecraft/world/entity/Entity spawnAtLocation (Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;
+method net/minecraft/world/entity/Entity discard ()V
+method net/minecraft/world/entity/Entity isAlive ()Z
+method net/minecraft/world/entity/Entity moveTo (DDDFF)V
+method net/minecraft/world/entity/Entity getBoundingBox ()Lnet/minecraft/world/phys/AABB;
+method net/minecraft/world/entity/Entity blockPosition ()Lnet/minecraft/core/BlockPos;
+method net/minecraft/world/entity/Entity getUUID ()Ljava/util/UUID;
+method net/minecraft/world/entity/Entity playSound (Lnet/minecraft/sounds/SoundEvent;FF)V
+method net/minecraft/world/entity/Entity getDisplayName ()Lnet/minecraft/network/chat/Component;
+method net/minecraft/world/entity/LivingEntity hasLineOfSight (Lnet/minecraft/world/entity/Entity;)Z
+method net/minecraft/world/entity/LivingEntity swing (Lnet/minecraft/world/InteractionHand;)V
+method net/minecraft/world/entity/LivingEntity getMainHandItem ()Lnet/minecraft/world/item/ItemStack;
+method net/minecraft/world/entity/LivingEntity heal (F)V
+method net/minecraft/world/entity/LivingEntity getAttribute (Lnet/minecraft/core/Holder;)Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;
+method net/minecraft/world/entity/LivingEntity readAdditionalSaveData (Lnet/minecraft/nbt/CompoundTag;)V
+method net/minecraft/world/entity/Mob setPersistenceRequired ()V
+method net/minecraft/world/entity/Mob setItemSlot (Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+method net/minecraft/world/entity/Mob setDropChance (Lnet/minecraft/world/entity/EquipmentSlot;F)V
+method net/minecraft/world/entity/Mob doHurtTarget (Lnet/minecraft/world/entity/Entity;)Z
+method net/minecraft/world/entity/Mob removeWhenFarAway (D)Z
+method net/minecraft/world/entity/Mob getTarget ()Lnet/minecraft/world/entity/LivingEntity;
+method net/minecraft/world/entity/Mob finalizeSpawn (Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;
+field net/minecraft/world/entity/Mob xpReward I
+class net/minecraft/world/entity/EquipmentSlot enum
+sfield net/minecraft/world/entity/EquipmentSlot MAINHAND Lnet/minecraft/world/entity/EquipmentSlot;
+sfield net/minecraft/world/item/Items IRON_SWORD Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items GOLDEN_SWORD Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items NETHERITE_SWORD Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items STICK Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/ItemStack EMPTY Lnet/minecraft/world/item/ItemStack;
+sfield net/minecraft/world/entity/EntityType SILVERFISH Lnet/minecraft/world/entity/EntityType;
+method net/minecraft/world/entity/EntityType create (Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity;
+method net/minecraft/world/entity/ai/attributes/AttributeInstance setBaseValue (D)V
+method net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal <init> (Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;IZZLjava/util/function/Predicate;)V
+method net/minecraft/world/entity/ai/goal/MeleeAttackGoal <init> (Lnet/minecraft/world/entity/PathfinderMob;DZ)V
+method net/minecraft/world/entity/ai/goal/WaterAvoidingRandomStrollGoal <init> (Lnet/minecraft/world/entity/PathfinderMob;D)V
+method net/minecraft/world/entity/ai/goal/LookAtPlayerGoal <init> (Lnet/minecraft/world/entity/Mob;Ljava/lang/Class;F)V
+method net/minecraft/world/entity/ai/goal/RandomLookAroundGoal <init> (Lnet/minecraft/world/entity/Mob;)V
+method net/minecraft/world/entity/ai/goal/FloatGoal <init> (Lnet/minecraft/world/entity/Mob;)V
+method net/minecraft/world/entity/ai/goal/target/HurtByTargetGoal <init> (Lnet/minecraft/world/entity/PathfinderMob;[Ljava/lang/Class;)V
+method net/minecraft/world/entity/ai/goal/GoalSelector addGoal (ILnet/minecraft/world/entity/ai/goal/Goal;)V
+method net/minecraft/world/entity/player/Player isCreative ()Z
+method net/minecraft/world/entity/player/Player isSpectator ()Z
+method net/minecraft/server/level/ServerPlayer isCreative ()Z
+method net/minecraft/server/level/ServerPlayer teleportTo (DDD)V
+method net/minecraft/server/level/ServerPlayer isRemoved ()Z
+method net/minecraft/server/level/ServerPlayer getMainHandItem ()Lnet/minecraft/world/item/ItemStack;
+method net/minecraft/server/level/ServerLevel getServer ()Lnet/minecraft/server/MinecraftServer;
+method net/minecraft/world/level/Level getServer ()Lnet/minecraft/server/MinecraftServer;
+method net/minecraft/server/players/PlayerList getPlayer (Ljava/util/UUID;)Lnet/minecraft/server/level/ServerPlayer;
+msig net/minecraft/server/players/PlayerList getPlayers ()Ljava/util/List; ()Ljava/util/List<Lnet/minecraft/server/level/ServerPlayer;>;
+msig net/minecraft/server/level/ServerLevel players ()Ljava/util/List; ()Ljava/util/List<Lnet/minecraft/server/level/ServerPlayer;>;
+msig net/minecraft/server/level/ServerLevel getEntitiesOfClass (Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List; <T:Lnet/minecraft/world/entity/Entity;>(Ljava/lang/Class<TT;>;Lnet/minecraft/world/phys/AABB;)Ljava/util/List<TT;>;
+msig net/minecraft/server/level/ServerLevel getEntitiesOfClass (Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List; <T:Lnet/minecraft/world/entity/Entity;>(Ljava/lang/Class<TT;>;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate<-TT;>;)Ljava/util/List<TT;>;
+method net/minecraft/nbt/CompoundTag putDouble (Ljava/lang/String;D)V
+method net/minecraft/nbt/CompoundTag getDouble (Ljava/lang/String;)D
+method net/minecraft/nbt/ListTag getCompound (I)Lnet/minecraft/nbt/CompoundTag;
+static net/minecraft/nbt/StringTag valueOf (Ljava/lang/String;)Lnet/minecraft/nbt/StringTag;
+method net/neoforged/neoforge/event/BuildCreativeModeTabContentsEvent getTabKey ()Lnet/minecraft/resources/ResourceKey;
+method net/neoforged/neoforge/event/BuildCreativeModeTabContentsEvent accept (Lnet/minecraft/world/level/ItemLike;)V
+method net/neoforged/neoforge/registries/DeferredHolder getKey ()Lnet/minecraft/resources/ResourceKey;
+# ---- client rendering generics ----
+csig net/minecraft/client/renderer/entity/EntityRenderer <T:Lnet/minecraft/world/entity/Entity;>Ljava/lang/Object;
+method net/minecraft/client/renderer/entity/EntityRenderer getTextureLocation (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+msig net/minecraft/client/renderer/entity/EntityRenderer getTextureLocation (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation; (TT;)Lnet/minecraft/resources/ResourceLocation;
+csig net/minecraft/client/model/EntityModel <T:Lnet/minecraft/world/entity/Entity;>Ljava/lang/Object;
+csig net/minecraft/client/model/HierarchicalModel <T:Lnet/minecraft/world/entity/Entity;>Lnet/minecraft/client/model/EntityModel<TT;>;
+csig net/minecraft/client/renderer/entity/RenderLayerParent <T:Lnet/minecraft/world/entity/Entity;M:Lnet/minecraft/client/model/EntityModel<TT;>;>Ljava/lang/Object;
+csig net/minecraft/client/renderer/entity/MobRenderer <T:Lnet/minecraft/world/entity/Mob;M:Lnet/minecraft/client/model/EntityModel<TT;>;>Lnet/minecraft/client/renderer/entity/EntityRenderer<TT;>;Lnet/minecraft/client/renderer/entity/RenderLayerParent<TT;TM;>;
+class net/minecraft/client/model/HumanoidModel super net/minecraft/client/model/EntityModel
+csig net/minecraft/client/model/HumanoidModel <T:Lnet/minecraft/world/entity/LivingEntity;>Lnet/minecraft/client/model/EntityModel<TT;>;
+method net/minecraft/client/model/HumanoidModel <init> (Lnet/minecraft/client/model/geom/ModelPart;)V
+class net/minecraft/client/renderer/entity/HumanoidMobRenderer super net/minecraft/client/renderer/entity/MobRenderer
+csig net/minecraft/client/renderer/entity/HumanoidMobRenderer <T:Lnet/minecraft/world/entity/Mob;M:Lnet/minecraft/client/model/HumanoidModel<TT;>;>Lnet/minecraft/client/renderer/entity/MobRenderer<TT;TM;>;
+method net/minecraft/client/renderer/entity/HumanoidMobRenderer <init> (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lnet/minecraft/client/model/HumanoidModel;F)V
+msig net/minecraft/client/renderer/entity/HumanoidMobRenderer <init> (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lnet/minecraft/client/model/HumanoidModel;F)V (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;TM;F)V
+sfield net/minecraft/client/model/geom/ModelLayers PLAYER Lnet/minecraft/client/model/geom/ModelLayerLocation;
+msig net/minecraft/nbt/CompoundTag getAllKeys ()Ljava/util/Set; ()Ljava/util/Set<Ljava/lang/String;>;
+imethod net/minecraft/util/RandomSource nextBoolean ()Z
+sfield net/minecraft/world/InteractionResult PASS Lnet/minecraft/world/InteractionResult;
+sfield net/minecraft/network/chat/ClickEvent$Action RUN_COMMAND Lnet/minecraft/network/chat/ClickEvent$Action;
+csig com/mojang/brigadier/arguments/ArgumentType <T:Ljava/lang/Object;>Ljava/lang/Object;
+csig com/mojang/brigadier/builder/ArgumentBuilder <S:Ljava/lang/Object;T:Lcom/mojang/brigadier/builder/ArgumentBuilder<TS;TT;>;>Ljava/lang/Object;
+csig com/mojang/brigadier/builder/LiteralArgumentBuilder <S:Ljava/lang/Object;>Lcom/mojang/brigadier/builder/ArgumentBuilder<TS;Lcom/mojang/brigadier/builder/LiteralArgumentBuilder<TS;>;>;
+csig com/mojang/brigadier/builder/RequiredArgumentBuilder <S:Ljava/lang/Object;T:Ljava/lang/Object;>Lcom/mojang/brigadier/builder/ArgumentBuilder<TS;Lcom/mojang/brigadier/builder/RequiredArgumentBuilder<TS;TT;>;>;
+msig net/minecraft/commands/Commands literal (Ljava/lang/String;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder; (Ljava/lang/String;)Lcom/mojang/brigadier/builder/LiteralArgumentBuilder<Lnet/minecraft/commands/CommandSourceStack;>;
+msig net/minecraft/commands/Commands argument (Ljava/lang/String;Lcom/mojang/brigadier/arguments/ArgumentType;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder; <T:Ljava/lang/Object;>(Ljava/lang/String;Lcom/mojang/brigadier/arguments/ArgumentType<TT;>;)Lcom/mojang/brigadier/builder/RequiredArgumentBuilder<Lnet/minecraft/commands/CommandSourceStack;TT;>;
+csig com/mojang/brigadier/arguments/IntegerArgumentType Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Ljava/lang/Integer;>;
+csig com/mojang/brigadier/arguments/StringArgumentType Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Ljava/lang/String;>;
+csig com/mojang/brigadier/arguments/FloatArgumentType Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Ljava/lang/Float;>;
+csig net/minecraft/commands/arguments/EntityArgument Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Lnet/minecraft/commands/arguments/selector/EntitySelector;>;
+csig net/minecraft/commands/arguments/coordinates/BlockPosArgument Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Ljava/lang/Object;>;
+csig net/minecraft/commands/arguments/ResourceLocationArgument Ljava/lang/Object;Lcom/mojang/brigadier/arguments/ArgumentType<Lnet/minecraft/resources/ResourceLocation;>;

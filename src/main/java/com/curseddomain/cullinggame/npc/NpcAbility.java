@@ -1,0 +1,21 @@
+package com.curseddomain.cullinggame.npc;
+
+public enum NpcAbility {
+   NONE,
+   RANDOM,
+   DEADLY_SENTENCING,
+   CONTRACT_RECREATION,
+   EXPLOSIONS,
+   NEEDLES,
+   LIGHTNING,
+   FORESIGHT,
+   JACOBS_LADDER,
+   COMEDIAN,
+   GRANITE_BLAST,
+   SKY_MANIPULATION,
+   SHIKIGAMI_SWARM,
+   SWORDSMAN,
+   SUMO,
+   CURSED_SPIRIT_MANIPULATION,
+   SHRINE;
+}
