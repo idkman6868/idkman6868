@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "steel_ball_run"
+version = "0.1.0"
+displayName = "JoJo's Bizarre Adventure: Steel Ball Run"
+authors = "Steel Ball Run Team"
+description = '''1890. Six thousand kilometres from San Diego to New York, on horseback.
+
+Register with Stephen Steel at San Diego Beach, pick your racer background and ride the nine stages of the Steel Ball Run against Gyro Zeppeli, Johnny Joestar, Diego Brando, Sandman and the rest of the field. Keep your horse fed, brushed and rested: stamina decides the race.
+
+0.1.0: the race and the horses. Spin, Stands and the Saint's Corpse come in later versions.
+Fan-made, non-commercial. JoJo's Bizarre Adventure is (c) Hirohiko Araki / Shueisha. All assets in this mod are original or procedurally generated.'''
+
+[[dependencies.steel_ball_run]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.steel_ball_run]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1, 1.22)"
+ordering = "NONE"
+side = "BOTH"

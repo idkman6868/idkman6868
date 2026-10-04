@@ -1,0 +1,206 @@
+# Minecraft 1.21.1 (Mojmap) / NeoForge 21.1 APIs used by Steel Ball Run that the Cursed Domain stubs don't cover.
+# Appended to ../tools/sandbox-build/stub-spec.txt by tools/sandbox-build.sh. NeoForge signatures were checked against
+# the NeoForge 1.21.1 sources; Minecraft ones against the 1.21.1 Mojang mappings. Brigadier and Netty are the real
+# libraries (see sandbox-build.sh), so they aren't listed here.
+
+# ---- class hierarchy
+class net/minecraft/world/entity/AgeableMob super net/minecraft/world/entity/PathfinderMob
+class net/minecraft/world/entity/animal/Animal super net/minecraft/world/entity/AgeableMob
+class net/minecraft/world/entity/animal/horse/AbstractHorse super net/minecraft/world/entity/animal/Animal
+class net/minecraft/world/entity/animal/horse/Horse super net/minecraft/world/entity/animal/horse/AbstractHorse
+class net/minecraft/world/entity/vehicle/VehicleEntity super net/minecraft/world/entity/Entity
+class net/minecraft/world/entity/vehicle/Boat super net/minecraft/world/entity/vehicle/VehicleEntity
+class net/minecraft/world/entity/vehicle/AbstractMinecart super net/minecraft/world/entity/vehicle/VehicleEntity
+class net/minecraft/world/level/biome/Biome
+class net/minecraft/world/level/material/FluidState
+class net/minecraft/world/level/block/state/BlockState
+class net/neoforged/neoforge/event/entity/EntityEvent super net/neoforged/bus/api/Event
+class net/neoforged/neoforge/event/entity/EntityTeleportEvent super net/neoforged/neoforge/event/entity/EntityEvent
+class net/neoforged/neoforge/event/entity/EntityTeleportEvent$EnderEntity super net/neoforged/neoforge/event/entity/EntityTeleportEvent
+class net/neoforged/neoforge/event/entity/EntityTeleportEvent$EnderPearl super net/neoforged/neoforge/event/entity/EntityTeleportEvent
+class net/neoforged/neoforge/event/entity/EntityTeleportEvent$ChorusFruit super net/neoforged/neoforge/event/entity/EntityTeleportEvent
+class net/neoforged/neoforge/event/entity/EntityTravelToDimensionEvent super net/neoforged/neoforge/event/entity/EntityEvent
+class net/neoforged/neoforge/event/entity/EntityJoinLevelEvent super net/neoforged/neoforge/event/entity/EntityEvent
+class net/neoforged/neoforge/event/entity/player/PlayerEvent super net/neoforged/neoforge/event/entity/living/LivingEvent
+class net/neoforged/neoforge/event/entity/living/LivingEvent super net/neoforged/neoforge/event/entity/EntityEvent
+class net/neoforged/neoforge/event/entity/player/PlayerInteractEvent super net/neoforged/neoforge/event/entity/player/PlayerEvent
+class net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract super net/neoforged/neoforge/event/entity/player/PlayerInteractEvent
+class net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase
+class net/minecraft/world/level/block/state/BlockState super net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase
+
+# ---- generic signatures
+csig net/minecraft/core/Holder <T0:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/minecraft/core/Holder value ()Ljava/lang/Object; ()TT0;
+csig net/minecraft/world/entity/EntityType <T:Lnet/minecraft/world/entity/Entity;>Ljava/lang/Object;
+msig net/minecraft/world/entity/EntityType create (Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity; (Lnet/minecraft/world/level/Level;)TT;
+csig net/minecraft/world/entity/EntityType$EntityFactory <T:Lnet/minecraft/world/entity/Entity;>Ljava/lang/Object;
+msig net/minecraft/world/entity/EntityType$EntityFactory create (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity; (Lnet/minecraft/world/entity/EntityType<TT;>;Lnet/minecraft/world/level/Level;)TT;
+csig net/minecraft/world/entity/EntityType$Builder <T:Lnet/minecraft/world/entity/Entity;>Ljava/lang/Object;
+msig net/minecraft/world/entity/EntityType$Builder of (Lnet/minecraft/world/entity/EntityType$EntityFactory;Lnet/minecraft/world/entity/MobCategory;)Lnet/minecraft/world/entity/EntityType$Builder; <T:Lnet/minecraft/world/entity/Entity;>(Lnet/minecraft/world/entity/EntityType$EntityFactory<TT;>;Lnet/minecraft/world/entity/MobCategory;)Lnet/minecraft/world/entity/EntityType$Builder<TT;>;
+msig net/minecraft/world/entity/EntityType$Builder sized (FF)Lnet/minecraft/world/entity/EntityType$Builder; (FF)Lnet/minecraft/world/entity/EntityType$Builder<TT;>;
+msig net/minecraft/world/entity/EntityType$Builder clientTrackingRange (I)Lnet/minecraft/world/entity/EntityType$Builder; (I)Lnet/minecraft/world/entity/EntityType$Builder<TT;>;
+msig net/minecraft/world/entity/EntityType$Builder build (Ljava/lang/String;)Lnet/minecraft/world/entity/EntityType; (Ljava/lang/String;)Lnet/minecraft/world/entity/EntityType<TT;>;
+csig net/neoforged/neoforge/registries/DeferredHolder <R:Ljava/lang/Object;T:TR;>Ljava/lang/Object;Lnet/minecraft/core/Holder<TR;>;Ljava/util/function/Supplier<TT;>;
+msig net/neoforged/neoforge/registries/DeferredHolder get ()Ljava/lang/Object; ()TT;
+csig net/neoforged/neoforge/registries/DeferredItem <T:Lnet/minecraft/world/item/Item;>Lnet/neoforged/neoforge/registries/DeferredHolder<Lnet/minecraft/world/item/Item;TT;>;Lnet/minecraft/world/level/ItemLike;
+csig net/neoforged/neoforge/registries/DeferredRegister <T:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/neoforged/neoforge/registries/DeferredRegister register (Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder; <I:TT;>(Ljava/lang/String;Ljava/util/function/Supplier<+TI;>;)Lnet/neoforged/neoforge/registries/DeferredHolder<TT;TI;>;
+msig net/neoforged/neoforge/registries/DeferredRegister create (Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister; <T:Ljava/lang/Object;>(Lnet/minecraft/resources/ResourceKey<+Lnet/minecraft/core/Registry<TT;>;>;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister<TT;>;
+msig net/neoforged/neoforge/registries/DeferredRegister create (Lnet/minecraft/core/Registry;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister; <T:Ljava/lang/Object;>(Lnet/minecraft/core/Registry<TT;>;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister<TT;>;
+csig net/neoforged/neoforge/registries/DeferredRegister$Items Lnet/neoforged/neoforge/registries/DeferredRegister<Lnet/minecraft/world/item/Item;>;
+msig net/neoforged/neoforge/registries/DeferredRegister$Items register (Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredItem; <I:Lnet/minecraft/world/item/Item;>(Ljava/lang/String;Ljava/util/function/Supplier<+TI;>;)Lnet/neoforged/neoforge/registries/DeferredItem<TI;>;
+csig net/neoforged/neoforge/common/ModConfigSpec$ConfigValue <T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/function/Supplier<TT;>;
+method net/neoforged/neoforge/common/ModConfigSpec$ConfigValue get ()Ljava/lang/Object;
+msig net/neoforged/neoforge/common/ModConfigSpec$ConfigValue get ()Ljava/lang/Object; ()TT;
+csig net/neoforged/neoforge/common/ModConfigSpec$BooleanValue Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue<Ljava/lang/Boolean;>;
+csig net/neoforged/neoforge/common/ModConfigSpec$IntValue Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue<Ljava/lang/Integer;>;
+csig net/neoforged/neoforge/common/ModConfigSpec$DoubleValue Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue<Ljava/lang/Double;>;
+method net/neoforged/neoforge/common/ModConfigSpec$Builder define (Ljava/lang/String;Ljava/lang/Object;)Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue;
+msig net/neoforged/neoforge/common/ModConfigSpec$Builder define (Ljava/lang/String;Ljava/lang/Object;)Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue; <T:Ljava/lang/Object;>(Ljava/lang/String;TT;)Lnet/neoforged/neoforge/common/ModConfigSpec$ConfigValue<TT;>;
+csig net/neoforged/neoforge/attachment/AttachmentType <T:Ljava/lang/Object;>Ljava/lang/Object;
+csig net/neoforged/neoforge/attachment/AttachmentType$Builder <T:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/neoforged/neoforge/attachment/AttachmentType serializable (Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/attachment/AttachmentType$Builder; <S::Lnet/minecraft/nbt/Tag;T::Lnet/neoforged/neoforge/common/util/INBTSerializable<TS;>;>(Ljava/util/function/Supplier<TT;>;)Lnet/neoforged/neoforge/attachment/AttachmentType$Builder<TT;>;
+msig net/neoforged/neoforge/attachment/AttachmentType$Builder build ()Lnet/neoforged/neoforge/attachment/AttachmentType; ()Lnet/neoforged/neoforge/attachment/AttachmentType<TT;>;
+csig net/neoforged/neoforge/common/util/INBTSerializable <T::Lnet/minecraft/nbt/Tag;>Ljava/lang/Object;
+imethod net/neoforged/neoforge/common/util/INBTSerializable serializeNBT (Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/Tag;
+msig net/neoforged/neoforge/common/util/INBTSerializable serializeNBT (Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/Tag; (Lnet/minecraft/core/HolderLookup$Provider;)TT;
+imethod net/neoforged/neoforge/common/util/INBTSerializable deserializeNBT (Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/Tag;)V
+msig net/neoforged/neoforge/common/util/INBTSerializable deserializeNBT (Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/Tag;)V (Lnet/minecraft/core/HolderLookup$Provider;TT;)V
+method net/minecraft/world/entity/Entity getData (Ljava/util/function/Supplier;)Ljava/lang/Object;
+msig net/minecraft/world/entity/Entity getData (Ljava/util/function/Supplier;)Ljava/lang/Object; <T:Ljava/lang/Object;>(Ljava/util/function/Supplier<Lnet/neoforged/neoforge/attachment/AttachmentType<TT;>;>;)TT;
+msig net/minecraft/world/entity/player/Player getData (Ljava/util/function/Supplier;)Ljava/lang/Object; <T:Ljava/lang/Object;>(Ljava/util/function/Supplier<Lnet/neoforged/neoforge/attachment/AttachmentType<TT;>;>;)TT;
+msig net/minecraft/server/level/ServerPlayer getData (Ljava/util/function/Supplier;)Ljava/lang/Object; <T:Ljava/lang/Object;>(Ljava/util/function/Supplier<Lnet/neoforged/neoforge/attachment/AttachmentType<TT;>;>;)TT;
+csig net/minecraft/world/level/saveddata/SavedData$Factory <T:Lnet/minecraft/world/level/saveddata/SavedData;>Ljava/lang/Object;
+msig net/minecraft/world/level/saveddata/SavedData$Factory <init> (Ljava/util/function/Supplier;Ljava/util/function/BiFunction;Lnet/minecraft/util/datafix/DataFixTypes;)V (Ljava/util/function/Supplier<TT;>;Ljava/util/function/BiFunction<Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;TT;>;Lnet/minecraft/util/datafix/DataFixTypes;)V
+msig net/minecraft/world/level/storage/DimensionDataStorage computeIfAbsent (Lnet/minecraft/world/level/saveddata/SavedData$Factory;Ljava/lang/String;)Lnet/minecraft/world/level/saveddata/SavedData; <T:Lnet/minecraft/world/level/saveddata/SavedData;>(Lnet/minecraft/world/level/saveddata/SavedData$Factory<TT;>;Ljava/lang/String;)TT;
+method net/minecraft/world/level/saveddata/SavedData save (Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;
+csig net/minecraft/network/syncher/EntityDataAccessor <T:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/minecraft/network/syncher/SynchedEntityData get (Lnet/minecraft/network/syncher/EntityDataAccessor;)Ljava/lang/Object; <T:Ljava/lang/Object;>(Lnet/minecraft/network/syncher/EntityDataAccessor<TT;>;)TT;
+msig net/minecraft/network/syncher/SynchedEntityData set (Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)V <T:Ljava/lang/Object;>(Lnet/minecraft/network/syncher/EntityDataAccessor<TT;>;TT;)V
+msig net/minecraft/network/syncher/SynchedEntityData$Builder define (Lnet/minecraft/network/syncher/EntityDataAccessor;Ljava/lang/Object;)Lnet/minecraft/network/syncher/SynchedEntityData$Builder; <T:Ljava/lang/Object;>(Lnet/minecraft/network/syncher/EntityDataAccessor<TT;>;TT;)Lnet/minecraft/network/syncher/SynchedEntityData$Builder;
+csig net/minecraft/network/codec/StreamEncoder <O:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/minecraft/network/codec/StreamEncoder encode (Ljava/lang/Object;Ljava/lang/Object;)V (TO;TT;)V
+csig net/minecraft/network/codec/StreamDecoder <I:Ljava/lang/Object;T:Ljava/lang/Object;>Ljava/lang/Object;
+msig net/minecraft/network/codec/StreamDecoder decode (Ljava/lang/Object;)Ljava/lang/Object; (TI;)TT;
+csig net/minecraft/network/codec/StreamCodec <B:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;Lnet/minecraft/network/codec/StreamDecoder<TB;TV;>;Lnet/minecraft/network/codec/StreamEncoder<TB;TV;>;
+msig net/minecraft/network/codec/StreamCodec of (Lnet/minecraft/network/codec/StreamEncoder;Lnet/minecraft/network/codec/StreamDecoder;)Lnet/minecraft/network/codec/StreamCodec; <B:Ljava/lang/Object;V:Ljava/lang/Object;>(Lnet/minecraft/network/codec/StreamEncoder<TB;TV;>;Lnet/minecraft/network/codec/StreamDecoder<TB;TV;>;)Lnet/minecraft/network/codec/StreamCodec<TB;TV;>;
+csig net/minecraft/network/protocol/common/custom/CustomPacketPayload$Type <T::Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;>Ljava/lang/Object;
+imethod net/minecraft/network/protocol/common/custom/CustomPacketPayload type ()Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type;
+msig net/minecraft/network/protocol/common/custom/CustomPacketPayload type ()Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type; ()Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type<+Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;>;
+csig net/neoforged/neoforge/network/handling/IPayloadHandler <T::Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;>Ljava/lang/Object;
+msig net/neoforged/neoforge/network/handling/IPayloadHandler handle (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;Lnet/neoforged/neoforge/network/handling/IPayloadContext;)V (TT;Lnet/neoforged/neoforge/network/handling/IPayloadContext;)V
+msig net/neoforged/neoforge/network/registration/PayloadRegistrar playToClient (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type;Lnet/minecraft/network/codec/StreamCodec;Lnet/neoforged/neoforge/network/handling/IPayloadHandler;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar; <T::Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;>(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type<TT;>;Lnet/minecraft/network/codec/StreamCodec<-Lnet/minecraft/network/RegistryFriendlyByteBuf;TT;>;Lnet/neoforged/neoforge/network/handling/IPayloadHandler<TT;>;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar;
+csig net/minecraft/world/InteractionResultHolder <T:Ljava/lang/Object;>Ljava/lang/Object;
+static net/minecraft/world/InteractionResultHolder sidedSuccess (Ljava/lang/Object;Z)Lnet/minecraft/world/InteractionResultHolder;
+msig net/minecraft/world/InteractionResultHolder sidedSuccess (Ljava/lang/Object;Z)Lnet/minecraft/world/InteractionResultHolder; <T:Ljava/lang/Object;>(TT;Z)Lnet/minecraft/world/InteractionResultHolder<TT;>;
+method net/minecraft/world/item/Item use (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;
+msig net/minecraft/world/item/Item use (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder<Lnet/minecraft/world/item/ItemStack;>;
+method net/minecraft/world/item/Item appendHoverText (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V
+msig net/minecraft/world/item/Item appendHoverText (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Ljava/util/List<Lnet/minecraft/network/chat/Component;>;Lnet/minecraft/world/item/TooltipFlag;)V
+msig net/minecraft/world/entity/Entity getTags ()Ljava/util/Set; ()Ljava/util/Set<Ljava/lang/String;>;
+msig net/minecraft/world/level/Level getBiome (Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder; (Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder<Lnet/minecraft/world/level/biome/Biome;>;
+msig net/neoforged/fml/ModContainer registerExtensionPoint (Ljava/lang/Class;Lnet/neoforged/fml/IExtensionPoint;)V <T::Lnet/neoforged/fml/IExtensionPoint;>(Ljava/lang/Class<TT;>;TT;)V
+msig net/minecraft/server/level/ServerLevel getEntitiesOfClass (Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List; <T:Lnet/minecraft/world/entity/Entity;>(Ljava/lang/Class<TT;>;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate<-TT;>;)Ljava/util/List<TT;>;
+msig net/minecraft/server/players/PlayerList getPlayers ()Ljava/util/List; ()Ljava/util/List<Lnet/minecraft/server/level/ServerPlayer;>;
+msig net/minecraft/commands/SharedSuggestionProvider suggest (Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture; (Ljava/util/stream/Stream<Ljava/lang/String;>;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture<Lcom/mojang/brigadier/suggestion/Suggestions;>;
+msig net/neoforged/neoforge/event/RegisterCommandsEvent getDispatcher ()Lcom/mojang/brigadier/CommandDispatcher; ()Lcom/mojang/brigadier/CommandDispatcher<Lnet/minecraft/commands/CommandSourceStack;>;
+msig net/minecraft/commands/CommandSourceStack sendSuccess (Ljava/util/function/Supplier;Z)V (Ljava/util/function/Supplier<Lnet/minecraft/network/chat/Component;>;Z)V
+
+# ---- entities
+method net/minecraft/world/entity/Entity getVehicle ()Lnet/minecraft/world/entity/Entity;
+method net/minecraft/world/entity/Entity stopRiding ()V
+method net/minecraft/world/entity/Entity startRiding (Lnet/minecraft/world/entity/Entity;Z)Z
+method net/minecraft/world/entity/Entity isPassenger ()Z
+method net/minecraft/world/entity/Entity addTag (Ljava/lang/String;)Z
+method net/minecraft/world/entity/Entity getTags ()Ljava/util/Set;
+method net/minecraft/world/entity/Entity getRandom ()Lnet/minecraft/util/RandomSource;
+method net/minecraft/world/entity/Entity getLookAngle ()Lnet/minecraft/world/phys/Vec3;
+method net/minecraft/world/entity/Entity isSpectator ()Z
+method net/minecraft/world/entity/LivingEntity setHealth (F)V
+method net/minecraft/world/entity/LivingEntity isFallFlying ()Z
+method net/minecraft/world/entity/LivingEntity die (Lnet/minecraft/world/damagesource/DamageSource;)V
+method net/minecraft/world/entity/LivingEntity isPushable ()Z
+method net/minecraft/world/entity/player/Player stopFallFlying ()V
+method net/minecraft/world/entity/player/Player hasPermissions (I)Z
+method net/minecraft/world/entity/player/Player playNotifySound (Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+method net/minecraft/world/entity/Mob mobInteract (Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;
+method net/minecraft/world/entity/Mob registerGoals ()V
+static net/minecraft/world/entity/Mob createMobAttributes ()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;
+method net/minecraft/world/entity/ai/navigation/PathNavigation moveTo (DDDD)Z
+method net/minecraft/world/entity/animal/horse/AbstractHorse isTamed ()Z
+method net/minecraft/world/entity/animal/horse/AbstractHorse setTamed (Z)V
+method net/minecraft/world/entity/animal/horse/AbstractHorse tameWithName (Lnet/minecraft/world/entity/player/Player;)Z
+method net/minecraft/world/entity/ai/attributes/AttributeInstance getBaseValue ()D
+sfield net/minecraft/world/entity/EntityType HORSE Lnet/minecraft/world/entity/EntityType;
+
+# ---- level, blocks
+method net/minecraft/world/level/Level getDayTime ()J
+method net/minecraft/world/level/Level isLoaded (Lnet/minecraft/core/BlockPos;)Z
+method net/minecraft/world/level/Level getBiome (Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;
+method net/minecraft/world/level/Level getRandom ()Lnet/minecraft/util/RandomSource;
+method net/minecraft/server/level/ServerLevel getSharedSpawnPos ()Lnet/minecraft/core/BlockPos;
+method net/minecraft/world/level/biome/Biome getBaseTemperature ()F
+method net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase isAir ()Z
+method net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase getFluidState ()Lnet/minecraft/world/level/material/FluidState;
+method net/minecraft/world/level/material/FluidState isEmpty ()Z
+static net/minecraft/core/BlockPos containing (DDD)Lnet/minecraft/core/BlockPos;
+method net/minecraft/world/phys/AABB inflate (D)Lnet/minecraft/world/phys/AABB;
+sfield net/minecraft/world/level/block/Blocks RED_WOOL Lnet/minecraft/world/level/block/Block;
+sfield net/minecraft/world/level/block/Blocks WHITE_WOOL Lnet/minecraft/world/level/block/Block;
+sfield net/minecraft/world/level/block/Blocks BLUE_WOOL Lnet/minecraft/world/level/block/Block;
+
+# ---- items, sounds, particles, text
+method net/minecraft/world/item/Item getDescriptionId ()Ljava/lang/String;
+method net/minecraft/world/item/ItemStack <init> (Lnet/minecraft/world/level/ItemLike;I)V
+sfield net/minecraft/world/item/Items WHEAT Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items LEAD Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items SADDLE Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items HAY_BLOCK Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items APPLE Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items CARROT Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Items SUGAR Lnet/minecraft/world/item/Item;
+sfield net/minecraft/world/item/Rarity EPIC Lnet/minecraft/world/item/Rarity;
+sfield net/minecraft/core/registries/Registries CREATIVE_MODE_TAB Lnet/minecraft/resources/ResourceKey;
+sfield net/minecraft/core/registries/Registries ENTITY_TYPE Lnet/minecraft/resources/ResourceKey;
+sfield net/minecraft/sounds/SoundEvents PLAYER_LEVELUP Lnet/minecraft/sounds/SoundEvent;
+sfield net/minecraft/sounds/SoundEvents HORSE_BREATHE Lnet/minecraft/sounds/SoundEvent;
+sfield net/minecraft/sounds/SoundEvents HORSE_EAT Lnet/minecraft/sounds/SoundEvent;
+sfield net/minecraft/sounds/SoundEvents HORSE_SADDLE Lnet/minecraft/sounds/SoundEvent;
+sfield net/minecraft/core/particles/ParticleTypes HAPPY_VILLAGER Lnet/minecraft/core/particles/SimpleParticleType;
+sfield net/minecraft/world/InteractionResult SUCCESS Lnet/minecraft/world/InteractionResult;
+static net/minecraft/world/InteractionResult sidedSuccess (Z)Lnet/minecraft/world/InteractionResult;
+sfield net/minecraft/world/InteractionHand MAIN_HAND Lnet/minecraft/world/InteractionHand;
+sfield net/minecraft/network/chat/ClickEvent$Action RUN_COMMAND Lnet/minecraft/network/chat/ClickEvent$Action;
+sfield net/minecraft/network/chat/HoverEvent$Action SHOW_TEXT Lnet/minecraft/network/chat/HoverEvent$Action;
+static net/minecraft/util/Mth wrapDegrees (F)F
+
+# ---- NeoForge events
+method net/neoforged/neoforge/event/entity/EntityEvent getEntity ()Lnet/minecraft/world/entity/Entity;
+method net/neoforged/neoforge/event/entity/EntityTeleportEvent setCanceled (Z)V
+method net/neoforged/neoforge/event/entity/EntityTeleportEvent$EnderPearl getPlayer ()Lnet/minecraft/server/level/ServerPlayer;
+method net/neoforged/neoforge/event/entity/EntityTeleportEvent$ChorusFruit getEntityLiving ()Lnet/minecraft/world/entity/LivingEntity;
+method net/neoforged/neoforge/event/entity/EntityTravelToDimensionEvent getDimension ()Lnet/minecraft/resources/ResourceKey;
+method net/neoforged/neoforge/event/entity/EntityTravelToDimensionEvent setCanceled (Z)V
+method net/neoforged/neoforge/event/entity/EntityJoinLevelEvent getLevel ()Lnet/minecraft/world/level/Level;
+method net/neoforged/neoforge/event/entity/EntityJoinLevelEvent loadedFromDisk ()Z
+method net/neoforged/neoforge/event/entity/EntityJoinLevelEvent setCanceled (Z)V
+method net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract getTarget ()Lnet/minecraft/world/entity/Entity;
+method net/neoforged/neoforge/event/entity/player/PlayerEvent getEntity ()Lnet/minecraft/world/entity/player/Player;
+method net/neoforged/neoforge/event/tick/ServerTickEvent getServer ()Lnet/minecraft/server/MinecraftServer;
+method net/neoforged/neoforge/data/event/GatherDataEvent getGenerator ()Lnet/minecraft/data/DataGenerator;
+method net/minecraft/data/DataGenerator getPackOutput ()Lnet/minecraft/data/PackOutput;
+method net/minecraft/data/DataGenerator addProvider (ZLnet/minecraft/data/DataProvider;)Lnet/minecraft/data/DataProvider;
+class net/neoforged/neoforge/common/data/LanguageProvider implements net/minecraft/data/DataProvider
+method net/neoforged/neoforge/common/data/LanguageProvider addTranslations ()V
+
+# ---- client
+imethod net/minecraft/client/gui/LayeredDraw$Layer render (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+class net/neoforged/bus/api/Event
+istatic net/minecraft/commands/SharedSuggestionProvider suggest (Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;
+sfield net/minecraft/ChatFormatting DARK_GREEN Lnet/minecraft/ChatFormatting;
+sfield net/minecraft/sounds/SoundSource MASTER Lnet/minecraft/sounds/SoundSource;
+sfield net/minecraft/sounds/SoundSource PLAYERS Lnet/minecraft/sounds/SoundSource;
+sfield net/minecraft/sounds/SoundSource NEUTRAL Lnet/minecraft/sounds/SoundSource;
+imethod net/minecraft/network/codec/StreamEncoder encode (Ljava/lang/Object;Ljava/lang/Object;)V
+imethod net/minecraft/network/codec/StreamDecoder decode (Ljava/lang/Object;)Ljava/lang/Object;
+imethod net/neoforged/neoforge/network/handling/IPayloadHandler handle (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;Lnet/neoforged/neoforge/network/handling/IPayloadContext;)V
