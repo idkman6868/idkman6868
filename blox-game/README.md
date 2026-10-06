@@ -1,16 +1,17 @@
-# Blox-style fruit game: assets
+# One Piece fan game: assets
 
 Companion to [`BLOX_FRUITS_MASTER_PROMPT.md`](../BLOX_FRUITS_MASTER_PROMPT.md).
 
 ![lineup](blender/exports/_lineup.png)
 
-`blender/rbx_asset_kit.py` builds the 20 fruits and 4 swords from the Content Bible, entirely in code.
+`blender/rbx_asset_kit.py` builds the 20 canon Devil Fruits and 6 canon swords (Marine Saber, Wado Ichimonji,
+Sandai Kitetsu, Shusui, Enma, Yoru) from the Content Bible, entirely in code.
 It checks triangle budgets, renders previews and exports FBX for Roblox.
 
 ```bash
 pip install bpy                     # or use the Blender app: blender -b -P blender/rbx_asset_kit.py -- --asset all
 python blender/rbx_asset_kit.py --asset all            # everything
-python blender/rbx_asset_kit.py --asset fruit:storm    # one asset
+python blender/rbx_asset_kit.py --asset fruit:gomu_gomu    # one asset
 ```
 
 ## Import into Roblox

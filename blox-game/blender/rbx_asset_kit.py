@@ -11,9 +11,9 @@ and prints a report line (tris, size in studs, pivot).
 Run with the Blender app:
     blender -b -P blox-game/blender/rbx_asset_kit.py -- --asset all --out blox-game/blender/exports
 or with the `bpy` Python module (pip install bpy):
-    python blox-game/blender/rbx_asset_kit.py --asset fruit:bubble --out blox-game/blender/exports
+    python blox-game/blender/rbx_asset_kit.py --asset fruit:gomu_gomu --out blox-game/blender/exports
 
---asset accepts: all | fruits | swords | fruit:<id> | sword:<id>
+--asset accepts: all | fruits | swords | fruit:<id> | sword:<id>   (ids: gomu_gomu, mera_mera, enma, ...)
 Units: 1 Blender unit = 1 Roblox stud. In the Roblox 3D Importer set File Dimensions to "Studs".
 """
 
@@ -30,43 +30,48 @@ import numpy as np
 # Content data (keep in sync with the Content Bible in BLOX_FRUITS_MASTER_PROMPT.md)
 # ---------------------------------------------------------------------------
 
+# Canon One Piece Devil Fruits. Colors follow the series where the fruit has been shown (Gomu Gomu, Mera Mera,
+# Ope Ope, Yami Yami); the rest are colored after the user's power.
 # base: body color, swirls: stripe colors (cycled per arm), stem/leaf colors.
-# Shape: squash (height scale), pear (top taper), lobes/lobe_depth (ridges), arms/twist (swirl pattern).
+# Shape: squash (height scale), pear (top taper), lobes/lobe_depth (ridges), heart (Ope Ope), arms/twist (swirls).
 FRUITS = {
-    "bubble":  dict(base="#7fd8f5", swirls=["#eafcff"], stem="#2b7f86", leaf="#46c7b3", arms=3, twist=1.2),
-    "pebble":  dict(base="#857b70", swirls=["#c9c0b3"], stem="#4f3f30", leaf="#7a9a5a", squash=0.82, lobes=7, lobe_depth=0.05),
-    "gust":    dict(base="#bdf0d6", swirls=["#ffffff"], stem="#3f7f62", leaf="#86e0ae", pear=0.18, arms=4, twist=2.0),
-    "ink":     dict(base="#1d1b3a", swirls=["#6b5bd6"], stem="#121018", leaf="#3d2f7a", arms=3, twist=1.6),
-    "glass":   dict(base="#9fd6f2", swirls=["#ffffff", "#d6f3ff"], stem="#5f8fa8", leaf="#a6e3f0", lobes=6, lobe_depth=0.04),
-    "rust":    dict(base="#a4532b", swirls=["#e0954f"], stem="#4a2a18", leaf="#7a6a3a", lobes=6, lobe_depth=0.06),
-    "tide":    dict(base="#1f6fd1", swirls=["#7fd3ff"], stem="#124a7a", leaf="#2fb5c9", arms=3, twist=2.2),
-    "thorn":   dict(base="#3f8f3a", swirls=["#b5e86a"], stem="#2a4a1a", leaf="#5fbf3f", lobes=8, lobe_depth=0.07),
-    "cinder":  dict(base="#d9481e", swirls=["#ffb347"], stem="#3a2a22", leaf="#ff7a2f", pear=0.12, arms=3, twist=1.8),
-    "magnet":  dict(base="#c0392b", swirls=["#d7dde2"], stem="#3b3f44", leaf="#8a949e", squash=1.18, arms=2, twist=0.0),
-    "storm":   dict(base="#4a3fb5", swirls=["#ffe14d"], stem="#2a2466", leaf="#7f74ff", arms=4, twist=2.6),
-    "prism":   dict(base="#f4f4ff", swirls=["#ff5e5e", "#ffd84d", "#5eff8a", "#5ec8ff", "#b05eff"], stem="#9a9ab8",
-                    leaf="#e0e0ff", arms=5, twist=1.4),
-    "clock":   dict(base="#d4a93a", swirls=["#5a4320"], stem="#3a2c14", leaf="#b08a2a", lobes=12, lobe_depth=0.035),
-    "mirror":  dict(base="#cfd6e6", swirls=["#8b96b0"], stem="#5a6378", leaf="#b5bfd6", arms=2, twist=3.0),
-    "wolf":    dict(base="#dfe8f2", swirls=["#6f9cc7"], stem="#3a4a5a", leaf="#9fc3e6", pear=0.15, arms=3, twist=1.0),
-    "griffin": dict(base="#e0a72e", swirls=["#fff2c4"], stem="#6a4a1a", leaf="#f0c75a", squash=1.15, arms=4, twist=1.5),
-    "kraken":  dict(base="#5a2a7a", swirls=["#d36ad8"], stem="#2a1238", leaf="#8a3fb0", lobes=8, lobe_depth=0.08),
-    "void":    dict(base="#0d0b18", swirls=["#7a3cff"], stem="#05040a", leaf="#3a1f7a", arms=3, twist=3.2),
-    "solar":   dict(base="#ffb21f", swirls=["#fff07a"], stem="#a0521a", leaf="#ff8a1f", lobes=10, lobe_depth=0.05),
-    "cosmos":  dict(base="#1b1f5e", swirls=["#ffffff", "#ff9ad5"], stem="#0f1238", leaf="#5a6aff", lobes=5,
-                    lobe_depth=0.14),
+    "bara_bara":    dict(base="#e04848", swirls=["#f4f0e8"], stem="#3a2a2a", leaf="#4f8f3a", arms=3, twist=1.4),
+    "supa_supa":    dict(base="#8f99a6", swirls=["#dfe5ec"], stem="#3b3f44", leaf="#6f8a5a", lobes=8, lobe_depth=0.05),
+    "horo_horo":    dict(base="#f2a6c8", swirls=["#2a2030"], stem="#2a2030", leaf="#c86aa0", arms=3, twist=1.8),
+    "hana_hana":    dict(base="#e86a9a", swirls=["#ffd1e2"], stem="#2f6a3a", leaf="#5fbf5a", lobes=5, lobe_depth=0.09),
+    "moku_moku":    dict(base="#c9ccd1", swirls=["#f7f8fa"], stem="#4a4e55", leaf="#8a9aa0", arms=3, twist=1.2),
+    "suna_suna":    dict(base="#d9b26a", swirls=["#f2dca6"], stem="#6a4a22", leaf="#9aa04a", pear=0.12, arms=4, twist=2.0),
+    "mera_mera":    dict(base="#e8551f", swirls=["#ffc93c"], stem="#3a2a22", leaf="#ff8a2f", pear=0.10, arms=3, twist=1.8),
+    "hie_hie":      dict(base="#8fd3f5", swirls=["#ffffff"], stem="#3a6a8a", leaf="#bfeaff", lobes=6, lobe_depth=0.04),
+    "goro_goro":    dict(base="#2a3f8f", swirls=["#ffe14d"], stem="#1a2240", leaf="#5a7fff", arms=4, twist=2.6),
+    "gomu_gomu":    dict(base="#7b3fa0", swirls=["#b788dc"], stem="#2f5a2a", leaf="#5aa04a", arms=4, twist=1.6),
+    "pika_pika":    dict(base="#ffd93b", swirls=["#fff6c4"], stem="#8a6a1a", leaf="#e0c040", arms=5, twist=1.2),
+    "magu_magu":    dict(base="#7a1a12", swirls=["#ff6a1f"], stem="#2a1210", leaf="#c0401a", lobes=7, lobe_depth=0.06),
+    "ope_ope":      dict(base="#d6336c", swirls=["#f59ab8"], stem="#3a1a2a", leaf="#4f8f4a", heart=1.0, arms=3, twist=1.0),
+    "ito_ito":      dict(base="#ff6fb0", swirls=["#ffd1e6"], stem="#5a2a40", leaf="#ff9ad0", arms=6, twist=3.0),
+    "mochi_mochi":  dict(base="#f4ecd8", swirls=["#d6c39a"], stem="#7a6a4a", leaf="#a8b07a", squash=0.9, arms=3, twist=1.0),
+    "neko_leopard": dict(base="#e0b040", swirls=["#5a3a10"], stem="#3a2a10", leaf="#8a7a2a", arms=5, twist=2.4),
+    "yami_yami":    dict(base="#3a1f4f", swirls=["#7a4fa0"], stem="#140a1c", leaf="#4a2a6a", lobes=5, lobe_depth=0.11),
+    "gura_gura":    dict(base="#e8e2cf", swirls=["#7a7468"], stem="#4a4438", leaf="#9a9a7a", lobes=6, lobe_depth=0.05),
+    "tori_phoenix": dict(base="#2f7fe0", swirls=["#ffe066"], stem="#1a3a6a", leaf="#4fd0ff", squash=1.12, arms=3, twist=1.6),
+    "uo_seiryu":    dict(base="#2a6fb0", swirls=["#9fdcff"], stem="#153a5a", leaf="#3fa0c0", squash=1.1, arms=4, twist=2.2),
 }
 
-# Swords: lengths in studs. curve = tip offset sideways; colors per part.
+# Canon swords. Lengths in studs; curve = tip offset sideways; guard "round" (tsuba) or "cross".
 SWORDS = {
-    "rusty_cutlass": dict(blade_len=2.6, blade_w=0.30, curve=0.35, blade="#9a7b62", edge="#c7b29a",
-                          guard="#6b5236", handle="#5a3a22", pommel="#6b5236", guard_r=0.26, handle_len=0.8),
-    "bamboo_katana": dict(blade_len=3.4, blade_w=0.17, curve=0.18, blade="#d9dee6", edge="#ffffff",
-                          guard="#3a3a3a", handle="#7da35a", pommel="#3a3a3a", guard_r=0.22, handle_len=1.0),
-    "moonlit_odachi": dict(blade_len=4.6, blade_w=0.19, curve=0.28, blade="#b9c6e8", edge="#f2f6ff",
-                           guard="#2a2f55", handle="#1d2140", pommel="#c7cff5", guard_r=0.26, handle_len=1.3),
-    "eclipse_katana": dict(blade_len=3.8, blade_w=0.18, curve=0.22, blade="#1a1424", edge="#ff4a6a",
-                           guard="#e0b84a", handle="#2a0f1a", pommel="#e0b84a", guard_r=0.24, handle_len=1.1),
+    "marine_saber":    dict(blade_len=3.0, blade_w=0.20, curve=0.12, blade="#d9dee6", edge="#ffffff",
+                            guard="#c9a24a", handle="#1f2f5a", pommel="#c9a24a", guard_r=0.22, handle_len=0.9),
+    "wado_ichimonji":  dict(blade_len=3.5, blade_w=0.17, curve=0.16, blade="#dfe4ea", edge="#ffffff",
+                            guard="#c9a24a", handle="#f4f4f0", pommel="#c9a24a", guard_r=0.22, handle_len=1.0),
+    "sandai_kitetsu":  dict(blade_len=3.4, blade_w=0.17, curve=0.17, blade="#cfd5dc", edge="#f2f2f2",
+                            guard="#b08a3a", handle="#8a1c1c", pommel="#b08a3a", guard_r=0.23, handle_len=1.0),
+    "shusui":          dict(blade_len=3.7, blade_w=0.18, curve=0.18, blade="#1c1c20", edge="#6a6a72",
+                            guard="#2a2a2a", handle="#5a1a1a", pommel="#2a2a2a", guard_r=0.24, handle_len=1.05),
+    "enma":            dict(blade_len=3.7, blade_w=0.18, curve=0.18, blade="#d4dbe6", edge="#eef2ff",
+                            guard="#d4a93a", handle="#4a2a6a", pommel="#d4a93a", guard_r=0.24, handle_len=1.05),
+    "yoru":            dict(blade_len=5.4, blade_w=0.28, curve=0.0, blade="#141414", edge="#2e2e2e",
+                            guard="#d4a93a", handle="#1f2a4a", pommel="#d4a93a", guard_r=0.24, handle_len=1.3,
+                            guard_type="cross"),
 }
 
 TRI_BUDGET = {"fruit": 2000, "sword": 3000}
@@ -202,10 +207,11 @@ def fruit_texture(look, size=256):
 
 def build_fruit(fid, out_dir):
     look = FRUITS[fid]
-    name = "Fruit_" + fid.capitalize()
+    name = "Fruit_" + "".join(p.capitalize() for p in fid.split("_"))
     radius = 0.8  # 1.6 stud diameter, readable in a player's hand
     squash, pear = look.get("squash", 1.0), look.get("pear", 0.0)
     lobes, lobe_depth = look.get("lobes", 0), look.get("lobe_depth", 0.0)
+    heart = look.get("heart", 0.0)
 
     px, stem_uv, leaf_uv = fruit_texture(look)
     img = make_image("T_" + name, px, out_dir)
@@ -223,6 +229,10 @@ def build_fruit(fid, out_dir):
             r += lobe_depth * math.cos(lobes * theta) * (1 - t * t)
         r *= 1 - pear * max(t, 0.0)
         z *= squash
+        if heart:  # two bumps on top, a point at the bottom
+            r *= 1 - 0.55 * heart * max(-t, 0.0) ** 1.3
+            z *= 1 + 0.3 * heart * max(-t, 0.0)
+            z -= heart * 0.35 * radius * max(t, 0.0) ** 2 * max(0.0, 1 - abs(x) / (radius * 0.55))
         z -= 0.10 * radius * max(t, 0.0) ** 10  # dimple where the stem sits
         vert.co = (x * r, y * r, z)
     uv = bm.loops.layers.uv.verify()
@@ -233,7 +243,7 @@ def build_fruit(fid, out_dir):
     for face in bm.faces:
         face.smooth = True
     body = bm_to_object(bm, name + "_body")
-    top = radius * squash * 0.9
+    top = radius * squash * 0.9 - heart * 0.3 * radius
 
     # Stem: slightly bent, tapered
     bm = bmesh.new()
@@ -306,7 +316,15 @@ def build_sword(sid, out_dir):
         paint_uv(bm, uv)
         return bm_to_object(bm, name + "_part")
 
-    parts.append(cyl(s["guard_r"], s["guard_r"], 0.06, guard_z, guard_uv, segments=10, sx=1.25))
+    if s.get("guard_type") == "cross":
+        bm = bmesh.new()
+        bmesh.ops.create_cube(bm, size=1.0)
+        bmesh.ops.scale(bm, vec=(s["guard_r"] * 4.0, 0.14, 0.14), verts=bm.verts)
+        bmesh.ops.translate(bm, vec=(0, 0, guard_z), verts=bm.verts)
+        paint_uv(bm, guard_uv)
+        parts.append(bm_to_object(bm, name + "_guard"))
+    else:
+        parts.append(cyl(s["guard_r"], s["guard_r"], 0.06, guard_z, guard_uv, segments=10, sx=1.25))
     parts.append(cyl(0.075, 0.07, hl, 0.0, handle_uv, segments=8))
     parts.append(cyl(0.09, 0.07, 0.08, -hl / 2 - 0.04, pommel_uv, segments=8))
 
@@ -396,12 +414,13 @@ def export(obj, kind, out_dir):
 def make_lineup(previews, path, cols=5, cell=256):
     """Contact sheet of previews so a whole batch can be checked in one image."""
     rows = -(-len(previews) // cols)
-    sheet = np.zeros((rows * cell, cols * cell, 4))
-    sheet[..., 3] = 1
+    sheet = None
     for i, p in enumerate(previews):
         img = bpy.data.images.load(p)
         w, h = img.size
         px = np.array(img.pixels[:]).reshape(h, w, 4)[:: max(1, h // cell), :: max(1, w // cell)][:cell, :cell]
+        if sheet is None:  # fill empty cells with the preview background
+            sheet = np.broadcast_to(px[0, 0], (rows * cell, cols * cell, 4)).copy()
         r, c = rows - 1 - i // cols, i % cols
         sheet[r * cell:r * cell + px.shape[0], c * cell:c * cell + px.shape[1]] = px
     img = bpy.data.images.new("lineup", sheet.shape[1], sheet.shape[0])
